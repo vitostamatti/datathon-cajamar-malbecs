@@ -86,4 +86,4 @@ Dejo algunas liberias que me parecen interesantes para probar.
 
 ## TODOs
 
--   [ ]
+-   [ ] Anotarnos cosas pa no olvidar...
