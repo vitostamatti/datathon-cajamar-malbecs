@@ -16,7 +16,7 @@ $(venv) pip install -r requirements.txt
 
 -   **Fallo del Jurado Local:** 28 de marzo de 2023
 
--   Las otras no las pongo para no mufar.
+-   Las otras no las pongo para no mufar. (jaja banco)
 
 ## Notes
 
@@ -29,6 +29,7 @@ Paso lo que esta en el doc:
 -   Feriados: hay que ver con que nivel de detalle los podemos encontrar y si nos afecta. La producion (lo que genere la vid) va a cambiar mucho en funcion de los feriados.
 -   Consumo de vino: hay que ver de donde lo sacamos o si hay algun proxy.
 -   Cosechas de otros productos agro: muy buena idea.
+-   Agregar shifts como columnas para que este al lado suyo un dato de una fecha previa. Se puede hacer con un window size.
 
 ### Modelos
 
@@ -44,7 +45,7 @@ Paso lo que esta en el doc:
 -   N-BEATS
 -   Temporal Fusion Transformer (Google)
 
-Creo que todos estan en implementados en Darts.
+Creo que todos estan en implementados en Darts. Boke.
 
 ### Evaluacion
 
@@ -53,7 +54,7 @@ Creo que todos estan en implementados en Darts.
 
 ## General
 
--   Hay que ir pensando como mierda vamos a tratar los datos de pandemia si nos llegan a venir.
+-   Hay que ir pensando como mierda vamos a tratar los datos de pandemia si nos llegan a venir. Facts
 
 ## Links
 
@@ -74,6 +75,10 @@ Dejo algunos notebooks que encontre en kaggle para robar datita.
 -   [Darts](https://www.kaggle.com/code/ferdinandberr/darts-forecasting-deep-learning-global-models)
 
 -   [Custom Forecast (small dataset)](https://www.kaggle.com/code/cdeotte/seasonal-model-with-validation-lb-1-091#kln-111)
+
+-   [Notebook Time-series propio] (https://colab.research.google.com/drive/1avbBsThGwqFemEgp7VJGcsO29xjNq-61?usp=sharing) 
+
+ 
 
 ## Libraries & Tools
 
