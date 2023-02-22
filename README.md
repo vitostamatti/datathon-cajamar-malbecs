@@ -38,6 +38,7 @@ Paso lo que esta en el doc:
 -   Exponential Smoothing (ES)
 -   XGBoost
 -   Prophet
+-   NeuralProphet
 -   LSTM (Deep Learning)
 -   DeepAR
 -   N-BEATS
