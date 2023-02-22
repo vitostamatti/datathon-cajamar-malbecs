@@ -63,7 +63,7 @@ Creo que todos estan en implementados en Darts. Boke.
 -   [Multiple Series? Forecast Them together with any Sklearn Model ](https://towardsdatascience.com/multiple-series-forecast-them-together-with-any-sklearn-model-96319d46269)
 -   [TBATS Python: Tutorial & Examples](https://www.ikigailabs.io/multivariate-time-series-forecasting-python/tbats-python)
 -   [VAR](https://www.ikigailabs.io/multivariate-time-series-forecasting-python/vector-autoregression-python)
--   LSTM PPT (https://docs.google.com/presentation/d/1Mxoc4WOZJPn0kn1-ptgLUJ-CjQDQAxQqr5_VwZkmpu4/edit#slide=id.p)
+-   LSTM-PPT(https://docs.google.com/presentation/d/1Mxoc4WOZJPn0kn1-ptgLUJ-CjQDQAxQqr5_VwZkmpu4/edit#slide=id.p)
 
 ## Notebooks
 
@@ -77,9 +77,9 @@ Dejo algunos notebooks que encontre en kaggle para robar datita.
 
 -   [Custom Forecast (small dataset)](https://www.kaggle.com/code/cdeotte/seasonal-model-with-validation-lb-1-091#kln-111)
 
--   [Notebook Time-series propio] (https://colab.research.google.com/drive/1avbBsThGwqFemEgp7VJGcsO29xjNq-61?usp=sharing) 
+-   [Notebook Time-series propio](https://colab.research.google.com/drive/1avbBsThGwqFemEgp7VJGcsO29xjNq-61?usp=sharing) 
 
--   [LSTM] (https://colab.research.google.com/drive/1eGeJvz7HYALnBfbaIifnXdC87MN1IGrj?usp=sharing)
+-   [LSTM](https://colab.research.google.com/drive/1eGeJvz7HYALnBfbaIifnXdC87MN1IGrj?usp=sharing)
 
  
 
