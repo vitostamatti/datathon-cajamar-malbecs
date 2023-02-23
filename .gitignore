@@ -129,3 +129,8 @@ dmypy.json
 .pyre/
 
 
+# exclude data by default. 
+# if something is added. Make it manually.
+data/**/*.txt
+data/**/*.csv
+data/**/*.pkl
