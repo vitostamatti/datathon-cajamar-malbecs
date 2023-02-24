@@ -134,3 +134,5 @@ dmypy.json
 data/**/*.txt
 data/**/*.csv
 data/**/*.pkl
+
+.DS_Store
