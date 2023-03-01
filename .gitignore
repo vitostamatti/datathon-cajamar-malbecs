@@ -131,8 +131,10 @@ dmypy.json
 
 # exclude data by default. 
 # if something is added. Make it manually.
-data/**/*.txt
-data/**/*.csv
-data/**/*.pkl
+data/raw/*.txt
+data/raw/*.csv
+data/raw/*.pkl
 
 .DS_Store
+
+# !data/**/processed
