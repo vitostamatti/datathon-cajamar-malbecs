@@ -1,7 +1,6 @@
-import dataclasses
 import pandas as pd
-import numpy as np
-import os
+
+from .common import fillna_by_group, fillna_by_value
 
 from dataclasses import dataclass
 
@@ -82,16 +81,6 @@ def filter_relevant_months(eto_month, months=[1,2,3,4,5,6]):
     return eto_month[eto_month['month'].isin(months)]
 
 
-def fillna_by_group(eto_month, cols=['MSLPLocalDayAvg'], group=['ID_ESTACION','month']):
-    for col in cols:
-        eto_month[col] = eto_month.groupby(group)[col].transform(lambda x: x.fillna(x.mean()))
-    return eto_month
-
-
-def fillna_by_value(eto_month, cols=['GustLocalDayAvg'] ):
-    eto_month[cols] = eto_month[cols].fillna(0)
-    return eto_month
-
 
 def flatten_pivot_columns(eto_pivot):
     eto_pivot.columns = [x +'Month'+ str(y) if y != '' else x for x,y in eto_pivot.columns.to_flat_index()]
@@ -103,7 +92,6 @@ def pivot_monthly_data(eto_month, index=['year','ID_ESTACION'], columns=['month'
     eto_pivot = eto_month.pivot(index=index, columns=columns, values=values).reset_index()
     eto_pivot = flatten_pivot_columns(eto_pivot)
     return eto_pivot
-
 
 
 
@@ -136,12 +124,20 @@ def preprocess_eto_dataset(path):
 
     df_month = filter_relevant_months(df_month)
 
-    df_month = fillna_by_group(df_month)
+    df_month = fillna_by_group(
+        df_month,
+        cols=['MSLPLocalDayAvg'], 
+        group=['ID_ESTACION','month']
+    )
 
-    df_month = fillna_by_value(df_month)
+    df_month = fillna_by_value(df_month, cols=['GustLocalDayAvg'], value=0)
 
     df_pivot = pivot_monthly_data(df_month)
 
-    df_pivot = fillna_by_group(df_pivot, cols=df_pivot.columns, group=['ID_ESTACION'])
+    df_pivot = fillna_by_group(
+        df_pivot, 
+        cols=df_pivot.columns, 
+        group=['ID_ESTACION']
+    )
 
     return df_pivot
