@@ -13,7 +13,7 @@ def above_mean_col(data,col):
 
 def quantiles_col(data,col):
     df = df_for_fe(data)
-    quantiles_df = pd.DataFrame(transf.groupby(col)['produccion'].mean()).reset_index()
+    quantiles_df = pd.DataFrame(df.groupby(col)['produccion'].mean()).reset_index()
     Q1 = quantiles_df.produccion.quantile(0.25)
     Q2 = quantiles_df.produccion.quantile(0.5)
     Q3 = quantiles_df.produccion.quantile(0.75)
