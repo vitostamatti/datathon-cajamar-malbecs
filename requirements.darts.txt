@@ -1,8 +1,0 @@
-pandas
-matplotlib
-seaborn
-scikit-learn
-ipykernel
-ipython
-statsmodels
-darts
