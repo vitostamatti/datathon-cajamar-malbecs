@@ -1,4 +1,6 @@
 #Denis functions 
+import pandas as pd
+
 
 def df_for_fe(data):
     transf = data[data.campaña != 21]
