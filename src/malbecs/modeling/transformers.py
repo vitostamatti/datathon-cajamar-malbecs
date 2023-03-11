@@ -39,6 +39,7 @@ class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMix
     def transform(self, X):
         X = X.copy()
         X[self.col] = X[self.col].map(self.category_encodings_)
+        X[self.col] = X[self.col].fillna(-1)
         return X
 
 
