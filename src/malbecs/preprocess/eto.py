@@ -1,15 +1,15 @@
 import pandas as pd
 
-from .common import fillna_by_group, fillna_by_value
+from malbecs.utils import fillna_by_group, fillna_by_value
 
 from dataclasses import dataclass
 
 @dataclass()
 class ETOPreprocessConfig:
-    cols_ids:list
+    path:str
     cols_sum:list
     cols_mean:list
-    path:str
+    output_path:str=None
 
 
 def load_eto_dataset(path:str):
@@ -40,21 +40,16 @@ def get_totals_by_daytime_and_nighttime(eto, cols):
     return eto[new_cols]
 
 
-
-def get_totals_by_daytime_and_nighttime(eto, cols, rename=True):
-    if rename:
-        new_cols = [f"Total{c[:-3]}" for c in cols]
-    else:
-        new_cols = cols
-
-    eto[new_cols] = (eto[cols]*12)    
+def get_totals_by_day(eto, cols):
+    new_cols = [f"Total{c[:-3]}" for c in cols]
+    eto[new_cols] = (eto[cols]*24)    
     return eto[new_cols]
 
 
 def get_data_for_sum_group(eto, cols_sum, cols_ids):
     eto_sum = pd.concat([
         eto[cols_ids],
-        get_totals_by_daytime_and_nighttime(eto, cols_sum)
+        get_totals_by_day(eto, cols_sum)
     ], axis=1)
     return eto_sum
 
@@ -64,14 +59,19 @@ def get_data_for_mean_group(eto, cols_mean, cols_ids):
     return eto_mean
 
 
-def get_monthly_datat(eto, cols_mean, cols_sum, cols_ids):
+def get_monthly_data(eto, cols_mean, cols_sum):
     
+    cols_ids = ['ID_ESTACION','year','month']
+
     eto_mean = get_data_for_mean_group(eto, cols_mean, cols_ids)
     eto_sum = get_data_for_sum_group(eto, cols_sum, cols_ids)
 
     grouped_sum = eto_sum.groupby(cols_ids).sum()
-    grouped_mean = eto_mean.groupby(cols_ids).mean()
+    grouped_sum.columns = [f"Sum{c}" for c in grouped_sum.columns]
     
+    grouped_mean = eto_mean.groupby(cols_ids).mean()
+    grouped_mean.columns = [f"Mean{c}" for c in grouped_mean.columns]
+
     eto_month = pd.concat([grouped_mean,grouped_sum],axis=1).reset_index()
     
     return eto_month
@@ -87,7 +87,9 @@ def flatten_pivot_columns(eto_pivot):
     return eto_pivot
 
 
-def pivot_monthly_data(eto_month, index=['year','ID_ESTACION'], columns=['month']):
+def pivot_monthly_data(eto_month):
+    index=['year','ID_ESTACION']
+    columns=['month']
     values = eto_month.drop(columns=index+columns).columns.tolist()
     eto_pivot = eto_month.pivot(index=index, columns=columns, values=values).reset_index()
     eto_pivot = flatten_pivot_columns(eto_pivot)
@@ -95,42 +97,27 @@ def pivot_monthly_data(eto_month, index=['year','ID_ESTACION'], columns=['month'
 
 
 
-def preprocess_eto_dataset(path):
+def preprocess_eto_dataset(eto_data, cols_mean, cols_sum, output_path=None):
     
-    eto_prepro_config = ETOPreprocessConfig(
-        cols_ids = ['ID_ESTACION','year','month'],
+    eto_data = add_year_and_month(eto_data)
 
-        cols_sum = [
-            'PrecipAmountLocalDaytimeAvg','PrecipAmountLocalNighttimeAvg',
-            'SnowAmountLocalDaytimeAvg','SnowAmountLocalNighttimeAvg'
-        ],
-
-        cols_mean = [
-            'GustLocalDayAvg', 'MSLPLocalDayAvg', 'RelativeHumidityLocalDayAvg',
-            'UVIndexLocalDayAvg', 'VisibilityLocalDayAvg', 'WindSpeedLocalDayAvg',
-            'TemperatureLocalAfternoonAvg','TemperatureLocalOvernightAvg'
-        ],
-        path = path 
+    df_month = get_monthly_data(
+        eto_data, cols_mean, 
+        cols_sum
     )
-
-    eto = load_eto_dataset(eto_prepro_config.path)
-    
-    eto = add_year_and_month(eto)
-
-    df_month = get_monthly_datat(
-        eto, eto_prepro_config.cols_mean, 
-        eto_prepro_config.cols_sum, 
-        eto_prepro_config.cols_ids)
 
     df_month = filter_relevant_months(df_month)
 
+    gust_cols = df_month.filter(like="Gust").columns.to_list()
+    snow_cols = df_month.filter(like="Snow").columns.to_list()
+    precip_cols  = df_month.filter(like="Precip").columns.to_list()
+    df_month = fillna_by_value(df_month, cols=gust_cols+snow_cols+precip_cols, value=0)
+
     df_month = fillna_by_group(
         df_month,
-        cols=['MSLPLocalDayAvg'], 
+        cols=df_month.columns,
         group=['ID_ESTACION','month']
     )
-
-    df_month = fillna_by_value(df_month, cols=['GustLocalDayAvg'], value=0)
 
     df_pivot = pivot_monthly_data(df_month)
 
@@ -140,4 +127,10 @@ def preprocess_eto_dataset(path):
         group=['ID_ESTACION']
     )
 
+    if output_path:
+        df_pivot.to_csv(output_path, index=False)
+
     return df_pivot
+
+
+
