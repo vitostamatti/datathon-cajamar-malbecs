@@ -1,16 +1,15 @@
-# datathon-cajamar-malbecs
+# Malbecs - Datathon Cajamar 2023 - Fase Local
 
-Repositorio de codigo para competencia de datos Cajamar 2023
+Repositorio de codigo para competencia de datos Cajamar 2023.
 
 ## Contenido
 
-El repositorio cuenta con una serie de notebooks de exploracion, feature engineering y
-modelado, en los cuales se pueden encontrar las diferentes pruebas y evaluaciones
-realizadas por el equipo.
+El repositorio cuenta con el codigo correspodiente a la entrega en fase local
+de la competencia Datathon Cajamar 2023.
 
-## Environment Setup
+## Setup
 
-1.  Clonar repositorio.
+1.  Clonar Repositorio
 
 ```bash
 $ git clone https://github.com/vitostamatti/datathon-cajamar-malbecs.git
