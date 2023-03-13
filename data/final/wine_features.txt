@@ -8,7 +8,6 @@ modo
 tipo
 color
 superficie
-produccion
 sup_tot_camp_finca
 superficie_total
 n_var_camp_finca

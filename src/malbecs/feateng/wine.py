@@ -1,5 +1,6 @@
 import pandas as pd
 from malbecs.utils import fillna_by_group, fillna_by_value, replace_zeros_with_na
+import os
 
 
 def get_sup_tot_camp_finca(data):
@@ -285,5 +286,12 @@ def feateng_wine_data(wine_data, output_path=None):
     # save
     if output_path:
         wine_data.to_csv(output_path, index=False)
+
+        dirname = os.path.dirname(output_path)
+
+        with open(os.path.join(dirname, "wine_features.txt"), "w") as f:
+            wine_cols = wine_data.columns.to_list()
+            wine_cols.remove('produccion')
+            f.write("\n".join(wine_cols))
 
     return wine_data

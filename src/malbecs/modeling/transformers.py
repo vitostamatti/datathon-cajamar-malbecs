@@ -3,17 +3,21 @@ from sklearn.datasets import load_diabetes
 import pandas as pd
 from typing import List
 import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 # TODO: compatibility with numpy arrays.
 # TODO: make it work for multiple columns.
 
 
 class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
-    def __init__(self, col: List[str], qs=[0.25, 0.5, 0.75]):
+    def __init__(self, col: List[str], qs=[0.25, 0.5, 0.75], scale=True):
         self.col = col
         self.qs = qs
+        self.scale = scale
 
     def fit(self, X: pd.DataFrame, y: pd.Series):
+
+        X = X.copy()
 
         if not isinstance(X, pd.DataFrame):
             return Exception("X must be of type pd.DataFrame")
@@ -29,17 +33,19 @@ class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMix
             for i, q in enumerate(qs):
                 if x < q:
                     return i
-            return len(qs)+1
+            return len(qs)
 
         self.category_encodings_ = category_means_.apply(
             lambda x: encode_qs(x, qs_)).to_dict()
+
+        self.mean_ = np.mean(category_means_)
 
         return self
 
     def transform(self, X):
         X = X.copy()
         X[self.col] = X[self.col].map(self.category_encodings_)
-        X[self.col] = X[self.col].fillna(-1)
+        X[self.col] = X[self.col].fillna(self.mean_)
         return X
 
 
@@ -76,4 +82,5 @@ class ThresholdFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMi
     def transform(self, X):
         X = X.copy()
         X[self.col] = X[self.col].map(self.category_encodings_)
+        X[self.col] = X[self.col].fillna(0)
         return X

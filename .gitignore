@@ -138,3 +138,4 @@ data/raw/*.pkl
 .DS_Store
 
 # !data/**/processed
+/old
