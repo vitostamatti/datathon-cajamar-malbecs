@@ -17,13 +17,14 @@
     -   [Limitaciones ](#limitaciones-)
     -   [Trabajo Futuro ](#trabajo-futuro-)
 -   [Setup ](#setup-)
-    -   [1. Clonar Repositorio](#1-clonar-repositorio)
-    -   [2. Crear entorno de desarrollo](#2-crear-entorno-de-desarrollo)
-    -   [3. Instalar `malbecs`](#3-instalar-malbecs)
+    -   [1. Pre-Requisitos](#1-pre-requisitos)
+    -   [2. Crear entorno de python](#2-crear-entorno-de-python)
+    -   [3. Instalar Dependencias](#3-instalar-dependencias)
     -   [4. Datos Iniciales](#4-datos-iniciales)
 -   [Entrega ](#entrega-)
     -   [Notebooks](#notebooks)
     -   [Scripts](#scripts)
+-   [Agradecimientos ](#agradecimientos-)
 -   [Autores ](#autores-)
 
 ## Problema <a name = "problema"></a>
@@ -76,21 +77,28 @@ resultados notablemente mejores, por lo que se opto por no incorporarlos.
 
 A continuacion se detallan los pasos que se deben realizar para la ejecucion correcta del codigo en el presente repositorio.
 
-### 1. Clonar Repositorio
+### 1. Pre-Requisitos
 
-```bash
-$ git clone https://github.com/vitostamatti/datathon-cajamar-malbecs.git
-```
+Se requiere contar con `python` instalado. Se puede descargar el instalador desde la [pagina oficial](https://www.python.org/downloads/).
 
-### 2. Crear entorno de desarrollo
+### 2. Crear entorno de python
+
+Crear un entorno de python si se desea aislar las dependencias del projecto.
 
 ```bash
 $ python -m venv venv
 $ source venv/Scripts/activate
+```
+
+### 3. Instalar Dependencias
+
+Instalar librerias de python.
+
+```bash
 $ (venv) pip install -r requirements.txt
 ```
 
-### 3. Instalar `malbecs`
+Instalar `malbecs` (libreria propia)
 
 ```
 $ (venv) pip install -e ./src/
@@ -108,11 +116,11 @@ Es necesario para la ejecucion del codigo, contar con los datos de origen.
 
 ## Entrega <a name="entrega"></a>
 
-En el directorio de [`./notebooks`](./notebooks) se encuentra la entega en formato `.ipynb` tanto para
-la exploracion y analisis de datos como para el entrenamiento y prediccion del modelo
-para esta primera fase. Por otro lado, en el directorio [`./scripts`](./scripts) se encuentran los
-scripts necesarios para la ejecucion de las diferentes transformaciones de datos, el entrenamiento
-del modelo final seleccionado para esta fase, y la generacion de predicciones.
+La entrega cuenta con dos _scripts_ y con dos formatos de ejecution. El _script_ de exploracion, y el _script_ de prediccion. Los formatos de ejecucion son: `notebooks` y `.py`.
+
+En el directorio de [`./notebooks`](./notebooks) se encuentra la entega en formato `.ipynb` tanto para la exploracion y analisis de datos como para el entrenamiento y prediccion del modelo para esta primera fase.
+
+En el directorio [`./scripts`](./scripts) se encuentran los scripts necesarios para la ejecucion de las diferentes transformaciones de datos, el entrenamiento del modelo final seleccionado para esta fase, y la generacion de predicciones.
 
 ### Notebooks
 
@@ -121,10 +129,30 @@ del modelo final seleccionado para esta fase, y la generacion de predicciones.
 
 ### Scripts
 
--   [run_prep.py](/scripts/run_prep.py)
--   [run_train.py](/scripts/run_train.py)
--   [run_pred_py](/scripts/run_pred.py)
--   [run_all_py](/scripts/run_all.py)
+Para la ejecucion de los script, lo mas conveniente es utilizar los parametros por defecto utilizando el siguiente comando.
+
+```bash
+$ (venv) python ./scripts/<script.py>
+```
+
+Si quiere mas informacion sobre los parametros utilizados, ejecutar el siguiente comando.
+
+```bash
+$ (venv) python ./scripts/<script.py> --help
+```
+
+Cada script cuenta con un log de ejecucion que muestra por consola los
+pasos realizados.
+
+-   [run_prep.py](/scripts/run_prep.py) : preproceso e ingenieria de variables de todos los datos de entrada.
+-   [run_train.py](/scripts/run_train.py): validacion y entrenamiento del modelo final seleccionado.
+-   [run_pred_py](/scripts/run_pred.py): generacion de predicciones para 2022 a partir del modelo entrenado.
+-   [run_all_py](/scripts/run_all.py): ejecucion end-to-end de todos los pasos.
+
+## Agradecimientos <a name = "agradecimientos"></a>
+
+Aprovechamos para agradecer a todos los encargados organizacion y realizacion del evento por la oportunidad de poder participar, y para felicitarlos por
+la excelente ejecucion del mismo. Fue una experiencia enriquecedora para el equipo y una competencia realmente interesante y desafiante en todos los aspectos.
 
 ## Autores <a name = "autores"></a>
 
