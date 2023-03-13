@@ -203,7 +203,7 @@ def get_shifted_production_by_finca(wine_data):
 
     return wine_data.merge(
         prod_by_finca[['campaña', 'id_finca',
-                       'prod_finca_shift_1', 'prod_finca_shift_2']],
+                       'prod_finca_shift_1', 'prod_finca_shift_1']],
         left_on=['campaña', 'id_finca'],
         right_on=['campaña', 'id_finca'],
     )
