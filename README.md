@@ -40,12 +40,12 @@ del modelo final seleccionado para esta fase, y la generacion de predicciones.
 
 ### Notebooks
 
--   [01-Exploracion-Malbecs]("../notebooks/01-Exploracion-Malbecs.ipynb")
--   [02-Prediccion-Malbecs]("../notebooks/02-Prediccion-Malbecs.ipynb")
+-   [01-Exploracion-Malbecs]("/notebooks/01-Exploracion-Malbecs.ipynb")
+-   [02-Prediccion-Malbecs]("/notebooks/02-Prediccion-Malbecs.ipynb")
 
 ### Scripts
 
--   [run_prep.py]("../../scripts/run_prep.py")
--   [run_train.py]("../../scripts/run_train.py")
--   [run_pred_py]("../../scripts/run_pred.py")
--   [run_all_py]("../../scripts/run_all.py")
+-   [run_prep.py]("/scripts/run_prep.py")
+-   [run_train.py]("/scripts/run_train.py")
+-   [run_pred_py]("/scripts/run_pred.py")
+-   [run_all_py]("/scripts/run_all.py")
