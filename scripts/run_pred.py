@@ -1,6 +1,6 @@
 # imports
 import os
-
+import numpy as np
 from malbecs.modeling import train as tr
 from malbecs.modeling import models as mm
 import logging
@@ -79,8 +79,14 @@ def run_pred(wine_path, eto_path, meteo_path, model_path, preds_path):
     X_final[cat_cols] = X_final[cat_cols].astype('category')
 
     logger.info(f'Loading model {model_path}')
-    m = mm.load_trained_model(model_path)
-    y_pred_final = m.predict(X_final)
+    
+    models = mm.load_trained_model(model_path)
+
+    preds_final = []
+    for model in models:
+        preds_final.append(model.predict(X_final))
+
+    y_pred_final = np.mean(preds_final,0)
 
     preds_final = data_final[['id_finca', 'variedad',
                               'modo', 'tipo', 'color', 'superficie']].copy()

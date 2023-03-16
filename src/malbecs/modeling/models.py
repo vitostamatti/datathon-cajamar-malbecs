@@ -1,60 +1,53 @@
 
 # random-forest
 from dataclasses import dataclass, asdict
-from catboost import CatBoost
 from sklearn.compose import make_column_transformer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import KBinsDiscretizer, MinMaxScaler, OrdinalEncoder
+from sklearn.preprocessing import KBinsDiscretizer, OrdinalEncoder, StandardScaler
 import pickle as pkl
-from malbecs.modeling.transformers import QuantileFeatureEncoder, ThresholdFeatureEncoder
 from typing import List
-seed = 99
+import malbecs.modeling.transformers as mt
+
+seed = 42
 
 
 def get_final_model():
 
     model_num_cols = [
-        "campaña",
         'superficie',
-        'prod_shift_max',
-        'prod_shift_avg',
-        'prod_est_mean_change'
+        'prod_shift_max', 
+        'prod_shift_change', 
+        'prod_shift_avg',  
     ]
 
-    model_cat_cols = [
-        'id_finca',
-        'id_zona',
-        "id_estacion",
-        'variedad',
-        "modo",
-        "tipo",
-        "color",
-        "prod_shift1_gt_shift2"
-    ]
-    m = make_pipeline(
+    m = make_pipeline( 
         make_column_transformer(
-            (OrdinalEncoder(handle_unknown='use_encoded_value',
-                            unknown_value=-1), model_cat_cols),
+             
+            (mt.BaseNEncoder(),['id_finca']), 
 
-            (QuantileFeatureEncoder(col="id_zona"), ['id_zona']),
-            (QuantileFeatureEncoder(col="id_finca"), ['id_finca']),
+            (mt.TargetEncoder(),['id_zona']), 
 
-            (ThresholdFeatureEncoder(col='altitud'), ['altitud']),
-            (ThresholdFeatureEncoder(col='variedad'), ['variedad']),
+            (OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1),['id_estacion']),
 
-            (KBinsDiscretizer(n_bins=5), ['altitud']),
+            (mt.BaseNEncoder(),['variedad']),
 
-            (MinMaxScaler(), model_num_cols),
+            (OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1),['modo']),
 
+            (KBinsDiscretizer(n_bins=2), ['altitud']),
+            
+            (StandardScaler(), model_num_cols),
+            
             remainder='drop'
         ),
         RandomForestRegressor(
-            random_state=99,
+            random_state=seed,
             n_estimators=200,
-            min_samples_leaf=3,
+            min_samples_leaf=4,
             n_jobs=-1,
             max_features='sqrt',
+            max_samples=0.8
+
         )
     )
     return m

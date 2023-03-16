@@ -1,10 +1,13 @@
 # imports
 import argparse
 import os
+import numpy as np
+
 
 from sklearn.model_selection import cross_validate
 
 from malbecs.modeling import train as tr
+from malbecs.modeling import models as mm
 from malbecs.preprocess import wine as wine_pr
 from malbecs.feateng import wine as wine_fe
 from malbecs.preprocess import eto as eto_pr
@@ -86,7 +89,7 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
 
     data = tr.merge_data(wine_data, eto_data=eto_data, meteo_data=meteo_data)
 
-    data_train = tr.filter_camp(data.copy(), min_camp=14, max_camp=21)
+    data_train = tr.filter_camp(data.copy(), min_camp=15, max_camp=21)
 
     X, y = tr.xy_split(data_train)
 
@@ -109,7 +112,7 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
 
     cv = tr.CampKFold(train_idxs, test_idxs)
 
-    m = tr.get_final_model()
+    m = mm.get_final_model()
 
     logger.info(f'Cross Validating model')
     res = cross_validate(
@@ -125,8 +128,17 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
 
     logger.info(f"Train RMSE: {res.get('train_score')}")
     logger.info(f"Test RMSE: {res.get('test_score')}")
+    logger.info(f"Train Mean RMSE: {np.mean(res.get('train_score'))}")
+    logger.info(f"Test Mean RMSE: {np.mean(res.get('test_score'))}")
 
-    m.fit(X, y)
+    logger.info(f"Training on full dataset")
+    models = []
+    for i in range(10):
+        m = mm.get_final_model()
+        m.set_params(randomforestregressor__random_state=mm.seed*(1+i))
+        m.fit(X, y)
+        models.append(m)
+
 
     data_final = tr.filter_camp(data, min_camp=22, max_camp=22)
 
@@ -134,7 +146,11 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
 
     X_final[cat_cols] = X_final[cat_cols].astype('category')
 
-    y_pred_final = m.predict(X_final)
+    preds_final = []
+    for model in models:
+        preds_final.append(model.predict(X_final))
+
+    y_pred_final = np.mean(preds_final,0)
 
     preds_final = data_final[['id_finca', 'variedad',
                               'modo', 'tipo', 'color', 'superficie']].copy()

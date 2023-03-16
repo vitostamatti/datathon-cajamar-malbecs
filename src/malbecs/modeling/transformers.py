@@ -1,12 +1,69 @@
-from sklearn.base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin
-from sklearn.datasets import load_diabetes
+from sklearn.base import BaseEstimator, TransformerMixin, OneToOneFeatureMixin, ClassNamePrefixFeaturesOutMixin
 import pandas as pd
 from typing import List
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
 import category_encoders as ce
-# TODO: compatibility with numpy arrays.
-# TODO: make it work for multiple columns.
+from typing import List,Union
+
+# create some warppers around category encoders to support latest scikit-learn api.
+
+class TargetEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+    
+    def __init__(self,
+            verbose: int = 0,
+            cols:Union[List[str],None] = None,
+            min_samples_leaf: int = 20,
+        ):
+        self.verbose=verbose
+        self.cols=cols
+        self.min_samples_leaf=min_samples_leaf
+        
+
+    def fit(self, X, y=None):
+        self.encoder_ = ce.TargetEncoder(
+            cols=self.cols,
+            verbose=self.verbose,
+            min_samples_leaf=self.min_samples_leaf
+        )
+        self.encoder_.fit(X, y)
+        return self
+    
+    def transform(self, X):
+        return self.encoder_.transform(X)
+
+
+
+class CatBoostEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+    def __init__(self, verbose: int = 0):
+        self.verbose = verbose
+
+    def fit(self, X, y=None):
+        self.encoder_ = ce.CatBoostEncoder(self.verbose)
+        self.encoder_.fit(X, y)
+        return self
+    
+    def transform(self, X):
+        return self.encoder_.transform(X)
+
+
+
+class BaseNEncoder(BaseEstimator, TransformerMixin, ClassNamePrefixFeaturesOutMixin):
+    def __init__(self, verbose:int = 0, base:int = 2):
+        self.verbose = verbose
+        self.base = base
+
+
+    def fit(self, X, y=None):
+        self.encoder_ = ce.BaseNEncoder(
+            verbose = self.verbose,
+            base = self.base
+        )
+        self.encoder_.fit(X, y)
+        self._n_features_out = len(self.encoder_.get_feature_names_out())
+        return self
+    
+    def transform(self, X):
+        return self.encoder_.transform(X)
 
 
 

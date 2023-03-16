@@ -134,7 +134,7 @@ dmypy.json
 data/raw/*.txt
 data/raw/*.csv
 data/raw/*.pkl
-
+data/models/*.pkl
 .DS_Store
 
 # !data/**/processed

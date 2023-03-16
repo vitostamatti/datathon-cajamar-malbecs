@@ -94,55 +94,6 @@ def rmse_score(y_true, y_pred):
 rmse_scorer = make_scorer(rmse_score, greater_is_better=False)
 
 
-def get_final_model():
-    seed = 42
-
-    model_num_cols = [
-        "campaña",
-        'superficie',
-        'prod_shift_max',
-        'prod_shift_avg',
-        'prod_est_mean_change'
-    ]
-
-    model_cat_cols = [
-        'id_finca',
-        'id_zona',
-        "id_estacion",
-        'variedad',
-        "modo",
-        "tipo",
-        "color",
-        "prod_shift1_gt_shift2"
-    ]
-    m = make_pipeline(
-        make_column_transformer(
-            (OrdinalEncoder(handle_unknown='use_encoded_value',
-                            unknown_value=-1), model_cat_cols),
-
-            (QuantileFeatureEncoder(col="id_zona"), ['id_zona']),
-            (QuantileFeatureEncoder(col="id_finca"), ['id_finca']),
-
-            (ThresholdFeatureEncoder(col='altitud'), ['altitud']),
-            (ThresholdFeatureEncoder(col='variedad'), ['variedad']),
-
-            (KBinsDiscretizer(n_bins=5), ['altitud']),
-
-            (MinMaxScaler(), model_num_cols),
-
-            remainder='drop'
-        ),
-        RandomForestRegressor(
-            random_state=seed,
-            n_estimators=200,
-            min_samples_leaf=3,
-            n_jobs=-1,
-            max_features='sqrt',
-        )
-    )
-    return m
-
-
 def save_trained_model(model, path):
     with open(path, "wb") as file:
         pkl.dump(model, file)
