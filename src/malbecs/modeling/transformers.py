@@ -4,9 +4,12 @@ import pandas as pd
 from typing import List
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-
+import category_encoders as ce
 # TODO: compatibility with numpy arrays.
 # TODO: make it work for multiple columns.
+
+
+
 
 
 class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
@@ -14,6 +17,7 @@ class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMix
         self.col = col
         self.qs = qs
         self.scale = scale
+        
 
     def fit(self, X: pd.DataFrame, y: pd.Series):
 

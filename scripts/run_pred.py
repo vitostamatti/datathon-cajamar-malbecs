@@ -38,7 +38,7 @@ parser.add_argument(
 )
 parser.add_argument(
     '-po', '--preds-out',
-    default="./data/final/UH2023_Universidad Complutense de Madrid (UCM)_Malbecs.txt",
+    default="./data/final/Malbecs.txt",
     help='Ruta destino de las predicciones.'
 )
 args = parser.parse_args()
