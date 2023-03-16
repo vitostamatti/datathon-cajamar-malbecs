@@ -3,10 +3,68 @@ from sklearn.datasets import load_diabetes
 import pandas as pd
 from typing import List
 import numpy as np
-from sklearn.preprocessing import MinMaxScaler
+import category_encoders as ce
+from typing import Any,List,Optional,Union
 
-# TODO: compatibility with numpy arrays.
-# TODO: make it work for multiple columns.
+# create some warppers around category encoders to support latest scikit-learn api.
+
+class TargetEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+    
+    def __init__(self,
+            verbose: int = 0,
+            cols:Union[List[str],None] = None,
+            min_samples_leaf: int = 20,
+        ):
+        self.verbose=verbose
+        self.cols=cols
+        self.min_samples_leaf=min_samples_leaf
+        
+
+    def fit(self, X, y=None):
+        self.encoder_ = ce.TargetEncoder(
+            cols=self.cols,
+            verbose=self.verbose,
+            min_samples_leaf=self.min_samples_leaf
+        )
+        self.encoder_.fit(X, y)
+        return self
+    
+    def transform(self, X):
+        return self.encoder_.transform(X)
+
+
+
+class CatBoostEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+    def __init__(self, verbose: int = 0):
+        self.verbose = verbose
+
+    def fit(self, X, y=None):
+        self.encoder_ = ce.CatBoostEncoder(self.verbose)
+        self.encoder_.fit(X, y)
+        return self
+    
+    def transform(self, X):
+        return self.encoder_.transform(X)
+
+
+
+class BaseNEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+    def __init__(self, verbose:int = 0, base:int = 2):
+        self.verbose = verbose
+        self.base = base
+
+
+    def fit(self, X, y=None):
+        self.encoder_ = ce.BaseNEncoder(
+            verbose = self.verbose,
+            base = self.base
+        )
+        self.encoder_.fit(X, y)
+        return self
+    
+    def transform(self, X):
+        return self.encoder_.transform(X)
+
 
 
 class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
