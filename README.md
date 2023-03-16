@@ -11,21 +11,22 @@
 
 ## Contenido
 
--   [Contenido](#contenido)
--   [Problema ](#problema-)
--   [Idea / Solucion ](#idea--solucion-)
-    -   [Limitaciones ](#limitaciones-)
-    -   [Trabajo Futuro ](#trabajo-futuro-)
--   [Setup ](#setup-)
-    -   [1. Pre-Requisitos](#1-pre-requisitos)
-    -   [2. Crear entorno de python](#2-crear-entorno-de-python)
-    -   [3. Instalar Dependencias](#3-instalar-dependencias)
-    -   [4. Datos Iniciales](#4-datos-iniciales)
--   [Entrega ](#entrega-)
-    -   [Notebooks](#notebooks)
-    -   [Scripts](#scripts)
--   [Agradecimientos ](#agradecimientos-)
--   [Autores ](#autores-)
+- [Contenido](#contenido)
+- [Problema ](#problema-)
+- [Idea / Solucion ](#idea--solucion-)
+  - [Limitaciones ](#limitaciones-)
+  - [Trabajo Futuro ](#trabajo-futuro-)
+- [Setup ](#setup-)
+  - [1. Pre-Requisitos](#1-pre-requisitos)
+  - [2. Crear entorno de python](#2-crear-entorno-de-python)
+  - [3. Instalar Dependencias](#3-instalar-dependencias)
+  - [4. Datos Iniciales](#4-datos-iniciales)
+- [Entrega ](#entrega-)
+  - [Presentacion](#presentacion)
+  - [Notebooks](#notebooks)
+  - [Scripts](#scripts)
+- [Agradecimientos ](#agradecimientos-)
+- [Autores ](#autores-)
 
 ## Problema <a name = "problema"></a>
 
@@ -121,6 +122,13 @@ La entrega cuenta con dos _scripts_ y con dos formatos de ejecution. El _script_
 En el directorio de [`./notebooks`](./notebooks) se encuentra la entega en formato `.ipynb` tanto para la exploracion y analisis de datos como para el entrenamiento y prediccion del modelo para esta primera fase.
 
 En el directorio [`./scripts`](./scripts) se encuentran los scripts necesarios para la ejecucion de las diferentes transformaciones de datos, el entrenamiento del modelo final seleccionado para esta fase, y la generacion de predicciones.
+
+Ademas, en el directorio [/docs](./docs/) se encuentra una presentacion resumen de la entrega realizada resumiendo los puntos importantes del proceso llevado a cabo por el equipo.
+
+### Presentacion
+
+La presentacion [Datathon Cajamar 2023 - Malbecs - Fase Local](./docs/Datathon%20Cajamar%202023%20-%20Malbecs%20-%20Fase%20Local.pdf) es un resumen de la presente entrega, donde se
+comentan alguans de las tecnicas utilizadas, como asi tambien los resultados obtenidos en terminos generales.
 
 ### Notebooks
 
