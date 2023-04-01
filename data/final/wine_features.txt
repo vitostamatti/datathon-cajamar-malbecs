@@ -1,4 +1,4 @@
-campaña
+campaÃ±a
 id_finca
 id_zona
 id_estacion
