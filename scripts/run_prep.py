@@ -8,6 +8,7 @@ import argparse
 import logging
 import logging.config
 import os
+import psutil
 
 
 def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo_final):
@@ -27,11 +28,15 @@ def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo
     wine_data = wine_fe.feateng_wine_data(
         wine_data, output_path=wine_final
     )
+
+
     logger.info(
         f'Processed {wine_raw} saved to {wine_final}.')
+    logger.info("virtual memory percent start: " + str(psutil.virtual_memory().percent))
 
     logger.info(f'Loading {eto_raw}')
     eto_data = eto_pr.load_eto_dataset(eto_raw)
+    
 
     logger.info(f'Preprocessing {eto_raw}')
     eto_data = eto_pr.preprocess_eto_dataset(
@@ -41,6 +46,7 @@ def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo
     eto_data = eto_fe.feateng_eto(eto_data, output_path=eto_final)
     logger.info(
         f'Processed {eto_raw} saved to {eto_final}')
+    logger.info("virtual memory percent start: " + str(psutil.virtual_memory().percent))
 
     logger.info(f'Loading {meteo_raw}')
     meteo_data = meteo_pr.load_meteo_data(meteo_raw)
@@ -49,6 +55,7 @@ def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo
     meteo_data = meteo_pr.preproces_meteo_data(meteo_data, meteo_final)
     logger.info(
         f'Processed {meteo_raw} saved to {meteo_final}')
+    logger.info("virtual memory percent start: " + str(psutil.virtual_memory().percent))
 
     return meteo_data
 
