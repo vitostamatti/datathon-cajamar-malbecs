@@ -13,6 +13,7 @@ import os
 def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo_final):
 
     logger = logging.getLogger(os.path.basename(__file__))
+
     logger.info('Starting preprocessing...')
 
     logger.info(f'Loading {wine_raw}')

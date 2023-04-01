@@ -139,7 +139,6 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
         m.fit(X, y)
         models.append(m)
 
-
     data_final = tr.filter_camp(data, min_camp=22, max_camp=22)
 
     X_final, _ = tr.xy_split(data_final)
@@ -150,7 +149,7 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
     for model in models:
         preds_final.append(model.predict(X_final))
 
-    y_pred_final = np.mean(preds_final,0)
+    y_pred_final = np.mean(preds_final, 0)
 
     preds_final = data_final[['id_finca', 'variedad',
                               'modo', 'tipo', 'color', 'superficie']].copy()

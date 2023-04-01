@@ -16,28 +16,30 @@ def get_final_model():
 
     model_num_cols = [
         'superficie',
-        'prod_shift_max', 
-        'prod_shift_change', 
-        'prod_shift_avg',  
+        'prod_shift_max',
+        'prod_shift_change',
+        'prod_shift_avg',
     ]
 
-    m = make_pipeline( 
+    m = make_pipeline(
         make_column_transformer(
-             
-            (mt.BaseNEncoder(),['id_finca']), 
 
-            (mt.TargetEncoder(),['id_zona']), 
+            (mt.BaseNEncoder(), ['id_finca']),
 
-            (OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1),['id_estacion']),
+            (mt.TargetEncoder(), ['id_zona']),
 
-            (mt.BaseNEncoder(),['variedad']),
+            (OrdinalEncoder(handle_unknown='use_encoded_value',
+             unknown_value=-1), ['id_estacion']),
 
-            (OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1),['modo']),
+            (mt.BaseNEncoder(), ['variedad']),
+
+            (OrdinalEncoder(handle_unknown='use_encoded_value',
+             unknown_value=-1), ['modo']),
 
             (KBinsDiscretizer(n_bins=2), ['altitud']),
-            
+
             (StandardScaler(), model_num_cols),
-            
+
             remainder='drop'
         ),
         RandomForestRegressor(
@@ -108,7 +110,7 @@ default_catboost_params = CatBoostRegressorParams(
 def get_catboost_model(catboost_params: CatBoostRegressorParams = default_catboost_params, **cbkwargs):
     import catboost as cb
     m = cb.CatBoostRegressor(
-        random_seed=42, **asdict(default_catboost_params), **cbkwargs)
+        random_seed=42, **asdict(catboost_params), **cbkwargs)
     return m
 
 # xgboost

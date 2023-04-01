@@ -8,6 +8,7 @@ modo
 tipo
 color
 superficie
+sup_is_nan
 sup_tot_camp_finca
 superficie_total
 n_var_camp_finca
@@ -36,3 +37,15 @@ prod_he_var_mean
 prod_he_var_std
 prod_finca_shift_1
 prod_finca_shift_1
+prod_he_shift1_total
+prod_he_shift2_total
+prod_he_shift_change_total
+prod_he_shift_avg_total
+prod_he_var_zone_mean_hist_total
+prod_he_var_zone_std_hist_total
+prod_he_var_mean_hist_total
+prod_he_var_std_hist_total
+prod_he_zone_mean_total
+prod_he_zone_std_total
+prod_he_var_mean_total
+prod_he_var_std_total

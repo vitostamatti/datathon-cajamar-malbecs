@@ -251,6 +251,12 @@ def get_shifted_superficie(wine_data: pd.DataFrame):
     return wine_data
 
 
+def get_total_prod_from_he(wine_data):
+    for c in [c for c in wine_data.columns if "_he" in c]:
+        wine_data[f"{c}_total"] = wine_data[c]*wine_data['superficie']
+    return wine_data
+
+
 def feateng_wine_data(wine_data, output_path=None):
 
     wine_data = get_sup_tot_camp_finca(wine_data)
@@ -282,6 +288,8 @@ def feateng_wine_data(wine_data, output_path=None):
     wine_data = get_shifted_production_he_by_var(wine_data)
 
     wine_data = get_shifted_production_by_finca(wine_data)
+
+    wine_data = get_total_prod_from_he(wine_data)
 
     # save
     if output_path:
