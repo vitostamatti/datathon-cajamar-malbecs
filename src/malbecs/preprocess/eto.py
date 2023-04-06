@@ -139,12 +139,117 @@ def pivot_monthly_data(eto_month):
     return eto_pivot
 
 
+
+def get_mean_and_std_by_month(eto_data, column):
+    return (
+        eto_data
+        [['ID_ESTACION','date',column]]
+        .groupby(
+        ["ID_ESTACION",eto_data.date.dt.month]
+        )
+        .agg(
+            mean = (column,'mean'),
+            std = (column,'std'),
+        )
+        .reset_index()
+        .rename(columns={
+            "date":"month",
+        })
+    )
+
+
+def get_days_over_and_under_mean(eto_data, column, out_column_name, over=True, under=True):
+
+    def rename(df):
+        return df.rename(columns={c:f"{out_column_name}{c}" for c in df.columns})
+    
+    def select(df):
+        overcols = [c for c in df.columns if 'Over' in c] if over else []
+        undercols = [c for c in df.columns if 'Under' in c] if under else []
+        return df[['Diff']+overcols + undercols]
+
+    month_data = get_mean_and_std_by_month(eto_data, column)
+    return (eto_data
+     [['ID_ESTACION','date',column]]
+        .assign(
+            month = eto_data['date'].dt.month,
+            year = eto_data['date'].dt.year,
+        )
+        .merge(
+            month_data,
+            left_on=['ID_ESTACION','month'],
+            right_on=['ID_ESTACION','month']
+        )
+        .assign(
+            Diff = lambda df: df[column] - df['mean']
+        )
+        .assign(
+            Over1Std = lambda df: (df['Diff'] > df["std"]).astype(int),
+            Over2Std = lambda df: (df['Diff'] > df["std"]*2).astype(int),
+            Under1Std = lambda df: (df['Diff']< -df["std"]).astype(int),
+            Under2Std = lambda df: (df['Diff']< -df["std"]*2).astype(int),
+        )
+        .groupby(["ID_ESTACION","year",'month'])
+        [["Diff",'Under1Std','Over1Std','Over2Std','Under2Std']]
+        .sum()
+        .pipe(select)
+        .pipe(rename)
+    )
+
+
+
+def get_days_over_and_under_features(eto_data):
+    features = get_days_over_and_under_mean(
+        eto_data, 
+        column="TemperatureLocalDayAvg", 
+        out_column_name="Temp",
+        over=True,
+        under=True
+    ).join(
+        get_days_over_and_under_mean(
+        eto_data, 
+        column="PrecipAmountLocalDayAvg", 
+        out_column_name="Precip",
+        under=False
+        )
+    ).join(
+        get_days_over_and_under_mean(
+            eto_data, 
+            column="SnowAmountLocalDayAvg", 
+            out_column_name="Snow",
+            under=False
+        )
+    ).join(
+        get_days_over_and_under_mean(
+            eto_data, 
+            column="WindSpeedLocalDayAvg", 
+            out_column_name="Wind",
+            under=False
+        )
+    ).join(
+        get_days_over_and_under_mean(
+        eto_data, 
+        column="GustLocalDayAvg", 
+        out_column_name="Gust",
+        under=False
+        )
+    )
+    feat_cols = features.columns.to_list()
+    features = filter_relevant_months(features.reset_index())
+    features = pivot_monthly_data(features)
+    features = fillna_by_value(features, cols = features.columns, value=-1) 
+    return features
+
+
 def preprocess_eto_dataset(eto_data, cols_mean, cols_sum, output_path=None):
+
+    over_under_features = get_days_over_and_under_features(eto_data)
 
     eto_data = add_year_and_month(eto_data)
 
     df_month = get_monthly_data(
-        eto_data, cols_mean,
+        eto_data, 
+        cols_mean,
         cols_sum
     )
 
@@ -153,6 +258,7 @@ def preprocess_eto_dataset(eto_data, cols_mean, cols_sum, output_path=None):
     gust_cols = df_month.filter(like="Gust").columns.to_list()
     snow_cols = df_month.filter(like="Snow").columns.to_list()
     precip_cols = df_month.filter(like="Precip").columns.to_list()
+
     df_month = fillna_by_value(
         df_month, cols=gust_cols+snow_cols+precip_cols, value=0)
 
@@ -169,6 +275,13 @@ def preprocess_eto_dataset(eto_data, cols_mean, cols_sum, output_path=None):
         cols=df_pivot.columns,
         group=['ID_ESTACION']
     )
+
+    df_pivot=df_pivot.merge(
+        over_under_features,
+        left_on=['ID_ESTACION', 'year'],
+        right_on=['ID_ESTACION', 'year']
+    )
+
 
     if output_path:
         df_pivot.to_csv(output_path, index=False)

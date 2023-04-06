@@ -40,6 +40,9 @@ def process_altitud(data):
 
     return data
 
+    
+    
+
 
 def preproces_wine_data(wine_data, fillna_alt=True, fillna_sup=True, output_path=None):
     # load data

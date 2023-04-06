@@ -119,7 +119,7 @@ def get_shifted_production_he_changes(wine_data: pd.DataFrame):
     return wine_data
 
 
-def _historic_prod_he_by_var_and_zone(wine_data, period: int):
+def _historic_prod_he_by_var_modo_zona(wine_data, period: int):
     return (
         wine_data[wine_data['campaña'] <= period]
         [['campaña', 'id_zona', 'variedad', 'modo', 'prod_he_shift1']]
@@ -131,12 +131,12 @@ def _historic_prod_he_by_var_and_zone(wine_data, period: int):
     )
 
 
-def get_historic_prod_he_by_var_and_zone(wine_data):
+def get_historic_prod_he_by_var_modo_modo_zona(wine_data):
     dfs = []
     from_period, to_period = wine_data['campaña'].min(
     )+1, wine_data['campaña'].max()+1
     for i in range(from_period, to_period):
-        dfs.append(_historic_prod_he_by_var_and_zone(wine_data, period=i))
+        dfs.append(_historic_prod_he_by_var_modo_zona(wine_data, period=i))
 
     # return dfs
     wine_data = wine_data.merge(
@@ -148,7 +148,7 @@ def get_historic_prod_he_by_var_and_zone(wine_data):
     return wine_data
 
 
-def _historic_prod_he_by_var(wine_data, period: int):
+def _historic_prod_he_by_var_modo(wine_data, period: int):
     return (
         wine_data[wine_data['campaña'] <= period]
         [['variedad', 'modo', 'prod_he_shift1']]
@@ -160,12 +160,12 @@ def _historic_prod_he_by_var(wine_data, period: int):
     )
 
 
-def get_historic_prod_he_by_var(wine_data):
+def get_historic_prod_he_by_var_modo(wine_data):
     dfs = []
     from_period, to_period = wine_data['campaña'].min(
     )+1, wine_data['campaña'].max()+1
     for i in range(from_period, to_period):
-        dfs.append(_historic_prod_he_by_var(wine_data, period=i))
+        dfs.append(_historic_prod_he_by_var_modo(wine_data, period=i))
 
     wine_data = wine_data.merge(
         pd.concat(dfs),
@@ -173,20 +173,22 @@ def get_historic_prod_he_by_var(wine_data):
         right_on=['variedad', 'modo', 'campaña'],
         how='left'
     ).fillna(-1)
+
     return wine_data
 
 
 def get_shifted_production_by_var(wine_data):
     prod_by_finca_var = wine_data.groupby(['campaña', 'id_finca', 'variedad'])[
         'produccion'].sum().reset_index()
+    
     prod_by_finca_var['prod_var_shift_1'] = prod_by_finca_var.groupby(
         ['id_finca', 'variedad'])['produccion'].shift(1).fillna(-1)
+    
     prod_by_finca_var['prod_var_shift_2'] = prod_by_finca_var.groupby(
         ['id_finca', 'variedad'])['produccion'].shift(2).fillna(-1)
 
     return wine_data.merge(
-        prod_by_finca_var[['campaña', 'id_finca', 'variedad',
-                           'prod_var_shift_1', 'prod_var_shift_2']],
+        prod_by_finca_var[['campaña', 'id_finca', 'variedad','prod_var_shift_1', 'prod_var_shift_2']],
         left_on=['campaña', 'id_finca', 'variedad'],
         right_on=['campaña', 'id_finca', 'variedad'],
     )
@@ -209,30 +211,100 @@ def get_shifted_production_by_finca(wine_data):
     )
 
 
+
 def get_shifted_production_he_by_var(wine_data):
 
-    prod_he_by_var = wine_data.groupby(['campaña', 'variedad', 'modo']).agg(
-        prod_he_var_mean=('prod_he_shift1', 'mean'),
-        prod_he_var_std=('prod_he_shift1', 'std')
+    prod_he_by_var = wine_data.groupby(['campaña', 'variedad']).agg(
+        prod_he_var_mean_shift1=('prod_he_shift1', 'mean'),
+        prod_he_var_mean_shift2=('prod_he_shift2', 'mean'),
+        prod_he_var_std_shift1=('prod_he_shift1', 'std')
     ).fillna(-1).reset_index()
 
+    prod_he_by_var['prod_he_var_change'] = [
+        x-y for x,y in 
+        zip(prod_he_by_var.prod_he_var_mean_shift1, prod_he_by_var.prod_he_var_mean_shift2)
+        ]
+
     return wine_data.merge(
-        prod_he_by_var[['campaña', 'variedad', 'modo',
-                        'prod_he_var_mean', 'prod_he_var_std']],
+        prod_he_by_var[[
+            'campaña', 'variedad', 
+            'prod_he_var_mean_shift1', 
+            'prod_he_var_std_shift1', 
+            'prod_he_var_change'
+        ]],
+        left_on=['campaña', 'variedad'],
+        right_on=['campaña', 'variedad'],
+    )
+
+
+def get_shifted_production_he_by_zone(wine_data):
+
+    prod_he_by_var = wine_data.groupby(['campaña', 'id_zona']).agg(
+        prod_he_zona_mean_shift1=('prod_he_shift1', 'mean'),
+        prod_he_zona_mean_shift2=('prod_he_shift2', 'mean'),
+        prod_he_zona_std_shift1=('prod_he_shift1', 'std')
+    ).fillna(-1).reset_index()
+
+    prod_he_by_var['prod_he_zona_change'] = [
+        x-y for x,y in 
+        zip(prod_he_by_var.prod_he_zona_mean_shift1, prod_he_by_var.prod_he_zona_mean_shift2)
+        ]
+
+    return wine_data.merge(
+        prod_he_by_var[[
+            'campaña', 'id_zona','prod_he_zona_mean_shift1', 
+            'prod_he_zona_std_shift1','prod_he_zona_change'
+        ]],
+        left_on=['campaña', 'id_zona'],
+        right_on=['campaña', 'id_zona'],
+    )
+
+
+def get_shifted_production_he_by_var_modo(wine_data):
+
+    prod_he_by_var_modo = wine_data.groupby(['campaña', 'variedad', 'modo']).agg(
+        prod_he_var_modo_mean_shift1=('prod_he_shift1', 'mean'),
+        prod_he_var_modo_mean_shift2=('prod_he_shift2', 'mean'),
+        prod_he_var_modo_std_shift1=('prod_he_shift1', 'std')
+    ).fillna(-1).reset_index()
+
+    prod_he_by_var_modo['prod_he_var_modo_change'] = [
+        x-y for x,y in 
+        zip(prod_he_by_var_modo.prod_he_var_modo_mean_shift1, prod_he_by_var_modo.prod_he_var_modo_mean_shift2)
+        ]
+
+    return wine_data.merge(
+        prod_he_by_var_modo[[
+            'campaña', 'variedad', 'modo',
+            'prod_he_var_modo_mean_shift1', 
+            'prod_he_var_modo_std_shift1', 
+            'prod_he_var_modo_change'
+        ]],
         left_on=['campaña', 'variedad', 'modo'],
         right_on=['campaña', 'variedad', 'modo'],
     )
 
 
-def get_shifted_production_he_by_zone(wine_data):
+def get_shifted_production_he_by_var_modo_zona(wine_data):
+    
     prod_he_by_zone = wine_data.groupby(['campaña', 'variedad', 'modo', 'id_zona']).agg(
-        prod_he_zone_mean=('prod_he_shift1', 'mean'),
-        prod_he_zone_std=('prod_he_shift1', 'std')
+        prod_he_var_modo_zona_mean_shift2=('prod_he_shift2', 'mean'),
+        prod_he_var_modo_zona_mean_shift1=('prod_he_shift1', 'mean'),
+        prod_he_var_modo_zona_std_shift1=('prod_he_shift1', 'std')
     ).fillna(-1).reset_index()
 
+    prod_he_by_zone['prod_he_var_modo_zona_change'] = [
+        x-y for x,y in 
+        zip(prod_he_by_zone.prod_he_var_modo_zona_mean_shift1, prod_he_by_zone.prod_he_var_modo_zona_mean_shift2)
+        ]
+
     return wine_data.merge(
-        prod_he_by_zone[['campaña', 'variedad', 'modo',
-                         'id_zona', 'prod_he_zone_mean', 'prod_he_zone_std']],
+        prod_he_by_zone[[
+            'campaña', 'variedad', 'modo', 'id_zona', 
+            'prod_he_var_modo_zona_mean_shift1', 
+            'prod_he_var_modo_zona_std_shift1', 
+            'prod_he_var_modo_zona_change'
+        ]],
         left_on=['campaña', 'variedad', 'modo', 'id_zona'],
         right_on=['campaña', 'variedad', 'modo', 'id_zona'],
     )
@@ -277,15 +349,19 @@ def feateng_wine_data(wine_data, output_path=None):
 
     wine_data = get_shifted_production_he_changes(wine_data)
 
-    wine_data = get_historic_prod_he_by_var_and_zone(wine_data)
+    wine_data = get_historic_prod_he_by_var_modo_modo_zona(wine_data)
 
-    wine_data = get_historic_prod_he_by_var(wine_data)
+    wine_data = get_historic_prod_he_by_var_modo(wine_data)
 
     wine_data = get_shifted_production_by_var(wine_data)
 
-    wine_data = get_shifted_production_he_by_zone(wine_data)
+    wine_data = get_shifted_production_he_by_var_modo_zona(wine_data)
+
+    wine_data = get_shifted_production_he_by_var_modo(wine_data)
 
     wine_data = get_shifted_production_he_by_var(wine_data)
+
+    wine_data = get_shifted_production_he_by_zone(wine_data)
 
     wine_data = get_shifted_production_by_finca(wine_data)
 
@@ -301,5 +377,6 @@ def feateng_wine_data(wine_data, output_path=None):
             wine_cols = wine_data.columns.to_list()
             wine_cols.remove('produccion')
             f.write("\n".join(wine_cols))
+
 
     return wine_data
