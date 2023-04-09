@@ -110,6 +110,55 @@ class QuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMix
         return X
 
 
+
+class GroupedQuantileFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
+
+    def __init__(self, col: str, groups:List[str], value:str, qs=[0.25, 0.5, 0.75], scale=True):
+        self.col = col
+        self.groups = groups
+        self.value = value
+        self.qs = qs
+        self.scale = scale
+        
+
+    def fit(self, X: pd.DataFrame, y: pd.Series):
+
+        X = X.copy()
+
+        if not isinstance(X, pd.DataFrame):
+            return Exception("X must be of type pd.DataFrame")
+        if not isinstance(y, pd.Series):
+            return Exception("y must be of type pd.Series")
+
+    
+        category_means_ = X.groupby(self.groups)[self.value].mean()
+        # category_means_ = pd.concat([X[self.col], y], axis=1).groupby(self.col)[
+            # y.name].mean()
+
+        qs_ = [category_means_.quantile(q) for q in self.qs]
+
+        def encode_qs(x, qs):
+            for i, q in enumerate(qs):
+                if x < q:
+                    return i
+            return len(qs)
+
+        self.category_encodings_ = category_means_.apply(
+            lambda x: encode_qs(x, qs_)).to_dict()
+
+        self.mean_ = np.mean(category_means_)
+
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        X[self.col] = X[self.col].map(self.category_encodings_)
+        X[self.col] = X[self.col].fillna(self.mean_)
+        return X
+
+
+
+
 class ThresholdFeatureEncoder(BaseEstimator, TransformerMixin, OneToOneFeatureMixin):
     methods = ['mean', 'median']
 
