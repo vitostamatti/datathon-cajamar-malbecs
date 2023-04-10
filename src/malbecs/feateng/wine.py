@@ -288,9 +288,9 @@ def get_shifted_production_he_by_var_modo(wine_data):
 def get_shifted_production_he_by_var_modo_zona(wine_data):
     
     prod_he_by_zone = wine_data.groupby(['campaña', 'variedad', 'modo', 'id_zona']).agg(
-        prod_he_var_modo_zona_mean_shift2=('prod_he_shift2', 'mean'),
         prod_he_var_modo_zona_mean_shift1=('prod_he_shift1', 'mean'),
-        prod_he_var_modo_zona_std_shift1=('prod_he_shift1', 'std')
+        prod_he_var_modo_zona_std_shift1=('prod_he_shift1', 'std'),
+        prod_he_var_modo_zona_mean_shift2=('prod_he_shift2', 'mean'),
     ).fillna(-1).reset_index()
 
     prod_he_by_zone['prod_he_var_modo_zona_change'] = [
@@ -373,7 +373,7 @@ def feateng_wine_data(wine_data, output_path=None):
 
         dirname = os.path.dirname(output_path)
 
-        with open(os.path.join(dirname, "wine_features.txt"), "w") as f:
+        with open(os.path.join(dirname, "wine_features.txt"), "w", encoding="utf-8") as f:
             wine_cols = wine_data.columns.to_list()
             wine_cols.remove('produccion')
             f.write("\n".join(wine_cols))
