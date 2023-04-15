@@ -54,20 +54,42 @@ cols_mean = avg_cols + max_cols + min_cols + \
     ['TemperatureLocalAfternoonAvg', 'TemperatureLocalOvernightAvg']
 
 
-def load_eto_dataset(path: str):
-    # 'DATOS_ETO.txt'
+def load_eto_dataset(path: str) -> pd.DataFrame:
+    """
+    Loads a dataset from a file and returns it as a pandas DataFrame.
+
+    Args:
+        path (str): The path to the dataset file to load.
+
+    Returns:
+        pd.DataFrame: The loaded dataset as a pandas DataFrame.
+    """
+    # Load the dataset using pandas and set the separator and header parameters.
     eto = pd.read_csv(path, sep='|', header=0)
+
+    # Call the 'parse_date' function to convert the date column to a datetime object.
     eto = parse_date(eto)
+
+    # Return the loaded dataset as a pandas DataFrame.
     return eto
 
 
-def parse_date(eto: pd.DataFrame):
+def parse_date(eto: pd.DataFrame) -> pd.DataFrame:
+    """
+    Convert the date column in a pandas DataFrame to a datetime object.
+
+    Args:
+        eto (pd.DataFrame): The dataset containing the date column.
+
+    Returns:
+        pd.DataFrame: The dataset with the date column converted to a datetime object.
+    """
+    # Convert the date column to a datetime object using the 'pd.to_datetime' method.
     eto['date'] = pd.to_datetime(
         eto['date'].astype(str).apply(
             lambda x: "{}/{}/{}".format(x[4:6], x[6:], x[0:4])
         )
     )
-    return eto
 
 
 def add_year_and_month(eto: pd.DataFrame):
