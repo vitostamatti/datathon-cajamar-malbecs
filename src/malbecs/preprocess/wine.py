@@ -41,8 +41,21 @@ def process_altitud(data):
     return data
 
     
-    
+def add_std_superficie(wine_data):
+    std_sup = wine_data.dropna(subset='superficie').groupby(
+        ['id_finca','variedad','modo']
+    )['superficie'].std().fillna(0).rename("std_superficie")
 
+    wine_data = wine_data.merge(
+            std_sup,
+            left_on=['id_finca','variedad','modo'],
+            right_on=['id_finca','variedad','modo'],
+            how='left'
+        )
+    
+    wine_data['std_superficie_null'] = wine_data['std_superficie'] == 0
+
+    return wine_data
 
 def preproces_wine_data(wine_data, fillna_alt=True, fillna_sup=True, output_path=None):
     # load data
@@ -56,21 +69,19 @@ def preproces_wine_data(wine_data, fillna_alt=True, fillna_sup=True, output_path
         wine_data = fillna_by_group(
             wine_data, cols=['altitud'], group=['id_estacion'])
 
-    if fillna_sup:
-        wine_data['sup_is_nan'] = wine_data['superficie'].apply(
-            lambda x: 0 if x > 0 else x)
-        wine_data['sup_is_nan'] = wine_data['sup_is_nan'].replace(np.nan, 1)
+    wine_data = add_std_superficie(wine_data)
 
-        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=[
-                                    'id_finca', 'variedad', 'modo'])
-        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=[
-                                    'id_zona', 'variedad', 'modo'])
-        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=[
-                                    'id_estacion', 'variedad', 'modo'])
-        wine_data = fillna_by_group(
-            wine_data, cols=['superficie'], group=['variedad', 'modo'])
-        wine_data = fillna_by_group(
-            wine_data, cols=['superficie'], group=['variedad'])
+    if fillna_sup:
+        wine_data['sup_is_nan'] = wine_data['superficie'].apply(lambda x: 0 if x > 0 else x)
+        wine_data['sup_is_nan'] = wine_data['sup_is_nan'].replace(np.nan, 1)
+        
+        
+        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['id_finca', 'variedad', 'modo'])
+        # wine_data['superficie'] = wine_data['superficie'].fillna(-1)
+        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['id_zona', 'variedad', 'modo'])
+        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['id_estacion', 'variedad', 'modo'])
+        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['variedad', 'modo'])
+        wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['variedad'])
 
     # save
     if output_path:

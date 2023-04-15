@@ -8,6 +8,8 @@ modo
 tipo
 color
 superficie
+std_superficie
+std_superficie_null
 sup_is_nan
 sup_tot_camp_finca
 superficie_total
