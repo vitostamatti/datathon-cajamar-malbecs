@@ -8,6 +8,9 @@ from sklearn.preprocessing import KBinsDiscretizer, OrdinalEncoder, StandardScal
 import pickle as pkl
 from typing import List
 import malbecs.modeling.transformers as mt
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.decomposition import PCA
 
 seed = 42
 
@@ -120,3 +123,70 @@ def get_catboost_model(catboost_params: CatBoostRegressorParams = default_catboo
 # Lasso
 
 # hist-forest
+
+
+#Modelo fase nacional
+with open("../data/final/eto_features.txt", "r") as f:
+    eto_cols = f.read().split("\n")
+precipuo = [c for c in eto_cols if ("Precip" in c) and ("StdM" in c )]
+percip_cols = [c for c in eto_cols if "Precip" in c]
+snow_cols = [c for c in eto_cols if "Snow" in c]
+
+
+def get_preprocesing_fase_nacional():
+
+    """Pipeline final para fase nacional"""
+
+    model_num_cols = [
+        'campaña',
+        'superficie',
+        'prod_shift_max',
+        'prod_shift_change',
+        'prod_shift_avg',
+        'prod_he_var_zone_mean_hist_total',
+        'prod_he_var_zone_std_hist_total',
+        'prod_he_var_modo_zona_mean_shift1_total',
+        "prod_he_var_modo_zona_change_total"
+    ]
+
+    return ColumnTransformer([
+
+        ('Flag',OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1), ['sup_is_nan']),
+        ('Zona_encoder',mt.TargetEncoder(), ['id_zona']),
+        ('Zona_encoder_2',OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1), ['id_zona']),
+        ('Variedad_encoder',OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1), ['variedad']),
+        ('Modo_encoder',OrdinalEncoder(handle_unknown='use_encoded_value',unknown_value=-1), ['modo']),
+        ('scaler',StandardScaler(), model_num_cols),
+
+        ('Under_over_scaler',StandardScaler(),[c for c in precipuo if "2Std" in c]),
+
+        ('Precip_PCA',make_pipeline(StandardScaler(),PCA(n_components=2, random_state=seed)),
+             [c for c in percip_cols if 'Sum' in c]
+        ),
+        ("Snow",StandardScaler(),[c for c in snow_cols if 'Sum' in c and ("1" in c or "2" in c)]),
+        ],
+
+        remainder='drop'
+    )
+
+
+def get_model_fase_nacional():
+    """Modelo final para fase nacional"""
+
+    prep = get_preprocesing_fase_nacional()
+
+    model = RandomForestRegressor(
+        random_state=seed,
+        n_estimators=500,
+        min_samples_leaf=4,
+        n_jobs=-1,
+        max_features=0.20,
+        max_samples=0.8
+    )
+
+    m = make_pipeline(
+        prep,
+        model
+    )
+
+    return m
