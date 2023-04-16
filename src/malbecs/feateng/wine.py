@@ -195,12 +195,12 @@ def get_shifted_production_he_changes(wine_data: pd.DataFrame):
 
     Args:
         wine_data (pd.DataFrame): DataFrame with the following columns: 
-        'campaña', 'id_finca', 'variedad', 'modo', 'superficie', and 'produccion'. 
-        'superficie' and 'produccion' are used to calculate the hectare yield.
+            'campaña', 'id_finca', 'variedad', 'modo', 'superficie', and 'produccion'. 
+            'superficie' and 'produccion' are used to calculate the hectare yield.
 
     Returns:
         pd.DataFrame: The input DataFrame with two additional columns: 
-        'prod_he_shift_change' and 'prod_he_shift_avg'.
+            'prod_he_shift_change' and 'prod_he_shift_avg'.
     """
     wine_data['prod_he_shift_change'] = [x-y for x,
                                          y in zip(wine_data.prod_he_shift1, wine_data.prod_he_shift2)]
@@ -244,8 +244,8 @@ def get_historic_prod_he_by_var_modo_modo_zona(wine_data):
 
     Returns:
         pd.DataFrame: A DataFrame with the historic mean production of `prod_he` grouped by
-        `variedad`, `modo`, `modo_zona`, and `campaña` for each year between the minimum and maximum
-        years in `wine_data`.
+            `variedad`, `modo`, `modo_zona`, and `campaña` for each year between the minimum and maximum
+            years in `wine_data`.
 
     """
     dfs = []
@@ -322,9 +322,9 @@ def get_shifted_production_by_var(wine_data):
 
     Returns:
         pandas DataFrame: A new DataFrame with the same columns as the input DataFrame plus two additional columns,
-        'prod_var_shift_1' and 'prod_var_shift_2', which contain the production values for each finca and variety
-        shifted by 1 and 2 rows, respectively. If there is no data available for a given finca and variety combination
-        for the shifted rows, the corresponding value will be -1.
+            'prod_var_shift_1' and 'prod_var_shift_2', which contain the production values for each finca and variety
+            shifted by 1 and 2 rows, respectively. If there is no data available for a given finca and variety combination
+            for the shifted rows, the corresponding value will be -1.
     """
     prod_by_finca_var = wine_data.groupby(['campaña', 'id_finca', 'variedad'])[
         'produccion'].sum().reset_index()
@@ -352,9 +352,9 @@ def get_shifted_production_by_finca(wine_data):
 
     Returns:
         pandas DataFrame: A new DataFrame with the same columns as the input DataFrame plus two additional columns,
-        'prod_finca_shift_1' and 'prod_finca_shift_2', which contain the production values for each 'id_finca'
-        shifted by 1 and 2 rows, respectively. If there is no data available for a given 'id_finca' for the shifted
-        rows, the corresponding value will be -1.
+            'prod_finca_shift_1' and 'prod_finca_shift_2', which contain the production values for each 'id_finca'
+            shifted by 1 and 2 rows, respectively. If there is no data available for a given 'id_finca' for the shifted
+            rows, the corresponding value will be -1.
     """
     prod_by_finca = wine_data.groupby(['campaña', 'id_finca'])[
         'produccion'].sum().reset_index()
@@ -381,7 +381,7 @@ def get_shifted_production_he_by_var(wine_data):
 
     Returns:
         DataFrame containing the mean and standard deviation of prod_he_shift1 and the difference between the means of prod_he_shift1 and prod_he_shift2
-        by variety and campaign
+            by variety and campaign
     """
     prod_he_by_var = wine_data.groupby(['campaña', 'variedad']).agg(
         prod_he_var_mean_shift1=('prod_he_shift1', 'mean'),
@@ -416,7 +416,7 @@ def get_shifted_production_he_by_zone(wine_data):
 
     Returns:
         DataFrame containing the mean and standard deviation of prod_he_shift1 and the difference between the means of prod_he_shift1 and prod_he_shift2
-        by zone and campaign
+            by zone and campaign
     """
     prod_he_by_var = wine_data.groupby(['campaña', 'id_zona']).agg(
         prod_he_zona_mean_shift1=('prod_he_shift1', 'mean'),
@@ -449,11 +449,11 @@ def get_shifted_production_he_by_var_modo(wine_data):
 
     Returns:
         A Pandas DataFrame with the same columns as wine_data plus additional columns 'prod_he_var_modo_mean_shift1',
-        'prod_he_var_modo_std_shift1', and 'prod_he_var_modo_change'. The 'prod_he_var_modo_mean_shift1' column represents 
-        the mean production HE for each variety and mode in the previous year (i.e., 'prod_he_shift1' column).
-        The 'prod_he_var_modo_std_shift1' column represents the standard deviation of the production HE for each variety 
-        and mode in the previous year. The 'prod_he_var_modo_change' column represents the difference in mean 
-        production HE between the current year and the previous year for each variety and mode.
+            'prod_he_var_modo_std_shift1', and 'prod_he_var_modo_change'. The 'prod_he_var_modo_mean_shift1' column represents 
+            the mean production HE for each variety and mode in the previous year (i.e., 'prod_he_shift1' column).
+            The 'prod_he_var_modo_std_shift1' column represents the standard deviation of the production HE for each variety 
+            and mode in the previous year. The 'prod_he_var_modo_change' column represents the difference in mean 
+            production HE between the current year and the previous year for each variety and mode.
     """
     prod_he_by_var_modo = wine_data.groupby(['campaña', 'variedad', 'modo']).agg(
         prod_he_var_modo_mean_shift1=('prod_he_shift1', 'mean'),
@@ -489,8 +489,8 @@ def get_shifted_production_he_by_var_modo_zona(wine_data):
     
     Returns:
         pandas.DataFrame: The merged DataFrame containing the mean and standard deviation of the prod_he_shift1 
-        column, the difference between the means of prod_he_shift1 and prod_he_shift2, grouped by the campaign,
-        variety, mode and zone, and the original wine production data.
+            column, the difference between the means of prod_he_shift1 and prod_he_shift2, grouped by the campaign,
+            variety, mode and zone, and the original wine production data.
     """
     prod_he_by_zone = wine_data.groupby(['campaña', 'variedad', 'modo', 'id_zona']).agg(
         prod_he_var_modo_zona_mean_shift1=('prod_he_shift1', 'mean'),
@@ -525,7 +525,7 @@ def get_shifted_superficie(wine_data: pd.DataFrame):
 
     Returns:
         pd.DataFrame: Output pandas DataFrame with two new columns "sup_shift1" and "sup_shift2" indicating the shifted
-        values of the "superficie" column. The NaN values in the shifted columns are filled with -1.
+            values of the "superficie" column. The NaN values in the shifted columns are filled with -1.
 """
     wine_data['sup_shift1'] = wine_data.groupby(['id_finca', 'variedad', 'modo'])[
         'superficie'].shift()
@@ -548,7 +548,7 @@ def get_total_prod_from_he(wine_data):
 
     Returns:
         pd.DataFrame: Output pandas DataFrame with new columns ending with "_he_total" indicating the total production
-        of each column ending with "_he" after multiplying it by the "superficie" column.
+            of each column ending with "_he" after multiplying it by the "superficie" column.
     """
     for c in [c for c in wine_data.columns if "_he" in c]:
         wine_data[f"{c}_total"] = wine_data[c]*wine_data['superficie']
