@@ -2,7 +2,7 @@
   <a href="" rel="noopener">
  <img src="https://pbs.twimg.com/media/FommiJ9WIAEBPI0.jpg" alt="Project logo"></a>
 </p>
-<h1 align="center">Malbecs - Datathon Cajamar 2023 - Fase Local</h1>
+<h1 align="center">Malbecs - Datathon Cajamar 2023 - Fase Nacional</h1>
 
 <p align="center">
     Repositorio de codigo para competencia de datos Cajamar 2023.
