@@ -11,6 +11,7 @@ import os
 
 import argparse
 
+from memory_profiler import profile
 
 parser = argparse.ArgumentParser(
     prog='Entrenar Modelo',
@@ -43,6 +44,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 
+@profile
 def run_train(wine_final, eto_final, meteo_final, model_final):
 
     logger = logging.getLogger(os.path.basename(__file__))

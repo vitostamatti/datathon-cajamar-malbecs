@@ -43,14 +43,37 @@ def norm_columns(wine: pd.DataFrame) -> pd.DataFrame:
 
 
 def process_altitud(data):
+    """
+    Takes in a pandas dataframe and processes the 'altitud' column by converting any altitude ranges
+    (represented as a string with a dash) into the average of the range as a float.
+
+    Args:
+        data (pandas.DataFrame): The input dataframe to process.
+
+    Returns:
+        pandas.DataFrame: The processed dataframe with the 'altitud' column transformed.
+    """
 
     def transform_altitud(alt):
+        """
+        Helper function that takes in an altitude value and converts it to the average value if it's a
+        range (represented as a string with a dash) or returns the value as is if it's already a float.
+
+        Args:
+            alt (float or str): The altitude value to transform.
+
+        Returns:
+            float: The transformed altitude value.
+        """
+
         if type(alt) is str:
             alt_list = alt.split("-")
             alt_list = list(map(float, alt_list))
             return np.mean(alt_list)
+
         return alt
 
+    # apply the transformation to the 'altitud' column
     data['altitud'] = data['altitud'].apply(lambda alt: transform_altitud(alt))
 
     return data
@@ -61,16 +84,13 @@ def add_std_superficie(wine_data):
     std_sup = wine_data.dropna(subset=['superficie']).groupby(
         ['id_finca','variedad','modo']
     )['superficie'].std().fillna(0).rename("std_superficie")
-
     wine_data = wine_data.merge(
             std_sup,
             left_on=['id_finca','variedad','modo'],
             right_on=['id_finca','variedad','modo'],
             how='left'
         )
-    
     wine_data['std_superficie_null'] = wine_data['std_superficie'] == 0
-
     return wine_data
 
 def preproces_wine_data(wine_data, fillna_alt=True, fillna_sup=True, output_path=None):
