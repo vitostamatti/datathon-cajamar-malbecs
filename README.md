@@ -87,7 +87,7 @@ Instalar `malbecs` (libreria propia)
 $ (venv) pip install -e ./src/
 ```
 
-Para mas detalle sobre la libreria malbecs, puede acceder a la documentacion disponible en [`pydocs`](/pydocs/build/html/index.html)
+Para mas detalle sobre la libreria malbecs, puede acceder a la documentacion disponible en [`pydocs`]([/pydocs/build/html/index.html](http://malbecs-docs-cajamar-2023.s3-website-us-east-1.amazonaws.com/))
 
 ### 4. Datos Iniciales
 
