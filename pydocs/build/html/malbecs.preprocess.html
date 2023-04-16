@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,7 +45,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Malbecs - Datathon Cajamar 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Malbecs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="malbecs.feateng.html">malbecs.feateng</a></li>
 <li class="toctree-l2"><a class="reference internal" href="malbecs.modeling.html">malbecs.modeling</a></li>
@@ -86,6 +87,7 @@
              
   <section id="malbecs-preprocess">
 <h1>malbecs.preprocess<a class="headerlink" href="#malbecs-preprocess" title="Permalink to this heading"></a></h1>
+<p>This package provides various utilities for loading, cleaning and preprocesing raw data.</p>
 <section id="module-malbecs.preprocess.eto">
 <span id="malbecs-preprocess-eto"></span><h2>malbecs.preprocess.eto<a class="headerlink" href="#module-malbecs.preprocess.eto" title="Permalink to this heading"></a></h2>
 <dl class="py function">
@@ -453,16 +455,7 @@ output_path: An optional string indicating the file path to save the preprocesse
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.preprocess.wine.add_std_superficie">
 <span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.wine.</span></span><span class="sig-name descname"><span class="pre">add_std_superficie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.wine.add_std_superficie" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the standard deviation of the ‘superficie’ column for each combination of ‘id_finca’, ‘variedad’,
-and ‘modo’ in the input dataframe and adds it as a new column ‘std_superficie’ to the dataframe. Also adds
-a new boolean column ‘std_superficie_null’ which indicates if the ‘std_superficie’ value is 0.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>wine_data (pandas.DataFrame): The input dataframe to add the ‘std_superficie’ column to.</p>
-</dd>
-<dt>Returns:</dt><dd><p>pandas.DataFrame: The input dataframe with the ‘std_superficie’ and ‘std_superficie_null’ columns added.</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.preprocess.wine.load_wine_dataset">

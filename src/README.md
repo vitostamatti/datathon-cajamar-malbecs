@@ -1,4 +1,4 @@
-# Malbecs - Datathon Cajamar 2023
+# About Malbecs
 
 ![alt text](https://pbs.twimg.com/media/FommiJ9WIAEBPI0.jpg)
 

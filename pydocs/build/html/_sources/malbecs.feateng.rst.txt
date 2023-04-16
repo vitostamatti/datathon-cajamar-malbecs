@@ -1,6 +1,7 @@
 malbecs.feateng
 =======================
 
+This package provides various utilities for handling missing values, transforming variables, creating new features, and more.
 
 malbecs.feateng.eto 
 --------------------------

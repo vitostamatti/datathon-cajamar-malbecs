@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,7 +45,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Malbecs - Datathon Cajamar 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Malbecs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">malbecs.feateng</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-malbecs.feateng.eto">malbecs.feateng.eto</a></li>
@@ -86,27 +87,64 @@
              
   <section id="malbecs-feateng">
 <h1>malbecs.feateng<a class="headerlink" href="#malbecs-feateng" title="Permalink to this heading"></a></h1>
+<p>This package provides various utilities for handling missing values, transforming variables, creating new features, and more.</p>
 <section id="module-malbecs.feateng.eto">
 <span id="malbecs-feateng-eto"></span><h2>malbecs.feateng.eto<a class="headerlink" href="#module-malbecs.feateng.eto" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.eto.feateng_eto">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">feateng_eto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.feateng_eto" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Performs feature engineering on a pandas DataFrame containing ETO data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data: The input DataFrame containing ETO data.
+output_path: Optional string representing the path to save the output DataFrame as a CSV file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A pandas DataFrame with engineered features for precipitation and snow data. The new columns include
+‘MeanPrecip’, ‘TotalPrecip’, ‘StdlPrecip’, ‘MeanSnow’, and ‘TotalSnow’.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.eto.get_mean_features">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">get_mean_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.get_mean_features" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Calculates the mean value of a set of features for each row in a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): the input DataFrame.
+features (list): a list of column names to be used to calculate the mean.
+name (str): the name of the new column that will store the mean value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: a copy of the input DataFrame with an additional column storing the mean value of the specified features.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.eto.get_std_features">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">get_std_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.get_std_features" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Calculates the standard deviation of a set of features for each row in a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): the input DataFrame.
+features (list): a list of column names to be used to calculate the standard deviation.
+name (str): the name of the new column that will store the standard deviation value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: a copy of the input DataFrame with an additional column storing the standard deviation value of the specified features.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.eto.get_total_features">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">get_total_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.get_total_features" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Calculates the total value of a set of features for each row in a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): the input DataFrame.
+features (list): a list of column names to be used to calculate the total.
+name (str): the name of the new column that will store the total value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: a copy of the input DataFrame with an additional column storing the total value of the specified features.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-malbecs.feateng.features_eng">
@@ -114,32 +152,89 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.features_eng.above_mean_col">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">above_mean_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.above_mean_col" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Creates a new binary column in a pandas DataFrame indicating whether the values in a given column
+are above or below the mean production value of the rows in the DataFrame where the ‘campaña’ column
+does not equal 21.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame to use for creating the new column.
+col (str): The name of the column to use for calculating the new binary column.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with a new binary column indicating whether the values in
+the specified column are above or below the mean production value of the rows where ‘campaña’ does not
+equal 21.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.features_eng.df_for_fe">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">df_for_fe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.df_for_fe" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Filter out rows in a pandas DataFrame where the ‘campaña’ column equals 21.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame to filter.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The filtered DataFrame with rows where ‘campaña’ equals 21 removed.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.features_eng.eto_annual_mean">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">eto_annual_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.eto_annual_mean" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Calculates the annual mean of various weather variables based on a DataFrame containing weather data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pandas.DataFrame): The DataFrame containing weather data.
+cols_list (list): A list of strings indicating which weather variables to average.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with additional columns representing the annual mean
+of the specified weather variables, and with the original columns for those variables dropped.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.features_eng.eto_annual_sum">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">eto_annual_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.eto_annual_sum" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Calculates the annual sum of various weather variables based on a DataFrame containing weather data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pandas.DataFrame): The DataFrame containing weather data.
+cols_list (list): A list of strings indicating which weather variables to sum.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with additional columns representing the annual sum
+of the specified weather variables, and with the original columns for those variables dropped.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.features_eng.eto_dict_generator">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">eto_dict_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.eto_dict_generator" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Generates a dictionary of column names for various weather variables based on a DataFrame containing
+weather data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pandas.DataFrame): The DataFrame containing weather data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: A dictionary where each key is a string indicating a weather variable and each value is a list
+of column names in the DataFrame that contain data for that weather variable.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.feateng.features_eng.quantiles_col">
 <span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">quantiles_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.quantiles_col" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Creates a new categorical column in a pandas DataFrame based on the quartiles of the production values
+for each unique value in a given column.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame to use for creating the new column.
+col (str): The name of the column to use for grouping and calculating quartiles.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with a new categorical column indicating which quartile
+the production value for each row falls into, based on the quartiles of the production values for
+each unique value in the specified column.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-malbecs.feateng.wine">

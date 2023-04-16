@@ -193,32 +193,7 @@ def rmse_score(y_true, y_pred):
 rmse_scorer = make_scorer(rmse_score, greater_is_better=False)
 
 
-def save_trained_model(model, path):
-    """Save a trained model to disk using pickle serialization.
 
-    Args:
-        model (object): The trained model object to be saved.
-        path (str): The path where the model will be saved.
-
-    Returns:
-        None
-    """
-    with open(path, "wb") as file:
-        pkl.dump(model, file)
-
-
-def load_trained_model(path):
-    """Load a trained model from disk using pickle deserialization.
-
-    Args:
-        path (str): The path where the trained model is located.
-
-    Returns:
-        object: The loaded model object.
-    """
-    with open(path,  "rb") as file:
-        model = pkl.load(file)
-    return model
 
 
 def convert_cat_features(X):

@@ -16,10 +16,11 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="malbecs.preprocess package" href="malbecs.preprocess.html" /> 
+    <link rel="prev" title="malbecs.preprocess" href="malbecs.preprocess.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,11 +44,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Malbecs - Datathon Cajamar 2023</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs package</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="malbecs.feateng.html">malbecs.feateng package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="malbecs.modeling.html">malbecs.modeling package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="malbecs.preprocess.html">malbecs.preprocess package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Malbecs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="malbecs.feateng.html">malbecs.feateng</a></li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.modeling.html">malbecs.modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.preprocess.html">malbecs.preprocess</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">malbecs.utils package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-malbecs.utils.utils">malbecs.utils.utils</a></li>
 </ul>
@@ -70,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="malbecs.html">malbecs package</a></li>
+          <li class="breadcrumb-item"><a href="malbecs.html">malbecs</a></li>
       <li class="breadcrumb-item active">malbecs.utils package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/malbecs.utils.rst.txt" rel="nofollow"> View page source</a>
@@ -83,22 +84,53 @@
              
   <section id="malbecs-utils-package">
 <h1>malbecs.utils package<a class="headerlink" href="#malbecs-utils-package" title="Permalink to this heading"></a></h1>
+<p>This package provides various common utility functions.</p>
 <section id="module-malbecs.utils.utils">
 <span id="malbecs-utils-utils"></span><h2>malbecs.utils.utils<a class="headerlink" href="#module-malbecs.utils.utils" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.utils.utils.fillna_by_group">
 <span class="sig-prename descclassname"><span class="pre">malbecs.utils.utils.</span></span><span class="sig-name descname"><span class="pre">fillna_by_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.utils.utils.fillna_by_group" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Fills missing values in the specified columns of a pandas DataFrame by taking the mean of the non-missing values
+within groups defined by the specified group columns.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pd.DataFrame): The input DataFrame.
+cols (List[str]): A list of column names to fill missing values for.
+group (List[str]): A list of column names to group by.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: The input DataFrame with the specified columns filled with the mean of non-missing values within</dt><dd><p>groups defined by the specified group columns.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.utils.utils.fillna_by_value">
 <span class="sig-prename descclassname"><span class="pre">malbecs.utils.utils.</span></span><span class="sig-name descname"><span class="pre">fillna_by_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.utils.utils.fillna_by_value" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Fills missing values in the specified columns of a pandas DataFrame with the specified value.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pd.DataFrame): The input DataFrame.
+cols (List[str]): A list of column names to fill missing values for.
+value (float, int, optional): The value to fill missing values with. Defaults to 0.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The input DataFrame with the specified columns filled with the specified value.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.utils.utils.replace_zeros_with_na">
 <span class="sig-prename descclassname"><span class="pre">malbecs.utils.utils.</span></span><span class="sig-name descname"><span class="pre">replace_zeros_with_na</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.utils.utils.replace_zeros_with_na" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Replaces zeros in the specified columns of a pandas DataFrame with NaNs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pd.DataFrame): The input DataFrame.
+cols (List[str]): A list of column names to replace zeros in.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The input DataFrame with zeros in the specified columns replaced with NaNs.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 </section>
@@ -107,7 +139,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="malbecs.preprocess.html" class="btn btn-neutral float-left" title="malbecs.preprocess package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="malbecs.preprocess.html" class="btn btn-neutral float-left" title="malbecs.preprocess" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

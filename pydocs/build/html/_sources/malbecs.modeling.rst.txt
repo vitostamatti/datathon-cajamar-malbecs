@@ -1,6 +1,8 @@
 malbecs.modeling
 ========================
 
+This package provides various utilities training and evaluating models.
+
 malbecs.modeling.models 
 ------------------------------
 

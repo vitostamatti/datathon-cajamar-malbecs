@@ -1,6 +1,8 @@
 malbecs.preprocess
 ==========================
 
+This package provides various utilities for loading, cleaning and preprocesing raw data.
+
 
 malbecs.preprocess.eto
 -----------------------------

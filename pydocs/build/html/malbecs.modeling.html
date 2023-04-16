@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -44,7 +45,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme.html">Malbecs - Datathon Cajamar 2023</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Malbecs</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="malbecs.feateng.html">malbecs.feateng</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">malbecs.modeling</a><ul>
@@ -86,44 +87,161 @@
              
   <section id="malbecs-modeling">
 <h1>malbecs.modeling<a class="headerlink" href="#malbecs-modeling" title="Permalink to this heading"></a></h1>
+<p>This package provides various utilities training and evaluating models.</p>
 <section id="module-malbecs.modeling.models">
 <span id="malbecs-modeling-models"></span><h2>malbecs.modeling.models<a class="headerlink" href="#module-malbecs.modeling.models" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.get_final_model">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">get_final_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.get_final_model" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Returns the final model for the challenge.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>ipeline: The final model pipeline returned by get_model_fase_nacional().</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.get_final_model_eto_features">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">get_final_model_eto_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.get_final_model_eto_features" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Returns a dictionary with feature names for the final ETO model.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>dict: A dictionary with the following keys:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>precipuo: a list of strings representing the names of the features indicating whether there was precipitation </dt><dd><p>over two standard deviations from the monthly mean for each of the first six months of the year.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>precip_cols: a list of strings representing the names of the features containing the total precipitation amount </dt><dd><p>for each day of the first six months of the year.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>snow_cols: a list of strings representing the names of the features containing the total snow amount for each day </dt><dd><p>of the first two months of the year.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.get_final_model_num_features">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">get_final_model_num_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.get_final_model_num_features" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Returns a list of strings representing the names of the numeric features used in the final model.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>list: A list of strings representing the names of the following numeric features:</dt><dd><ul class="simple">
+<li><p>campaña: an integer representing the year of the campaign.</p></li>
+<li><p>superficie: a float representing the size of the crop field.</p></li>
+<li><p>prod_shift_max: a float representing the maximum production shift in the field.</p></li>
+<li><p>prod_shift_change: a float representing the change in production shift over time.</p></li>
+<li><p>prod_shift_avg: a float representing the average production shift.</p></li>
+<li><dl class="simple">
+<dt>prod_he_var_zone_mean_hist_total: a float representing the mean historical production variance </dt><dd><p>of the field divided by the variance of the zone.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>prod_he_var_zone_std_hist_total: a float representing the standard deviation of the historical production variance </dt><dd><p>of the field divided by the variance of the zone.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>prod_he_var_modo_zona_mean_shift1_total: a float representing the mean shift in the mode of the zone’s historical </dt><dd><p>production variance compared to the current year’s production variance.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>prod_he_var_modo_zona_change_total: a float representing the change in the mode of the zone’s historical </dt><dd><p>production variance over time.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.get_model_fase_nacional">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">get_model_fase_nacional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.get_model_fase_nacional" title="Permalink to this definition"></a></dt>
-<dd><p>Modelo final para fase nacional</p>
+<dd><p>Returns a pipeline object representing the final model for the national phase.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>Pipeline: A pipeline object with the following steps:</dt><dd><ul class="simple">
+<li><p>prep: The preprocessing pipeline returned by get_preprocesing_fase_nacional().</p></li>
+<li><dl class="simple">
+<dt>model: A RandomForestRegressor with the following hyperparameters:</dt><dd><ul>
+<li><p>random_state: The seed for the random number generator.</p></li>
+<li><p>n_estimators: The number of trees in the forest.</p></li>
+<li><p>min_samples_leaf: The minimum number of samples required to be at a leaf node.</p></li>
+<li><p>n_jobs: The number of jobs to run in parallel for both fit and predict.</p></li>
+<li><p>max_features: The maximum number of features to consider when looking for the best split.</p></li>
+<li><p>max_samples: The maximum number of samples to draw from X to train each base estimator.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.get_preprocesing_fase_nacional">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">get_preprocesing_fase_nacional</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.get_preprocesing_fase_nacional" title="Permalink to this definition"></a></dt>
-<dd><p>Pipeline final para fase nacional</p>
+<dd><p>Returns a ColumnTransformer object representing the final preprocessing pipeline for the national phase.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>ColumnTransformer: A ColumnTransformer object with the following steps:</dt><dd><ul class="simple">
+<li><p>Flag: An OrdinalEncoder to encode the ‘sup_is_nan’ column as an ordinal variable, with unknown values encoded as -1.</p></li>
+<li><p>Zona_encoder: A TargetEncoder to encode the ‘id_zona’ column as a target variable.</p></li>
+<li><p>Zona_encoder_2: An OrdinalEncoder to encode the ‘id_zona’ column as an ordinal variable, with unknown values encoded as -1.</p></li>
+<li><p>Variedad_encoder: An OrdinalEncoder to encode the ‘variedad’ column as an ordinal variable, with unknown values encoded as -1.</p></li>
+<li><p>Modo_encoder: An OrdinalEncoder to encode the ‘modo’ column as an ordinal variable, with unknown values encoded as -1.</p></li>
+<li><p>scaler: A StandardScaler to scale the numeric features returned by get_final_model_num_features().</p></li>
+<li><p>Under_over_scaler: A StandardScaler to scale the precipitation features in precipuo.</p></li>
+<li><p>Precip_PCA: A pipeline with a StandardScaler and a PCA with 2 components to reduce the dimensionality of the precipitation features in precip_cols.</p></li>
+<li><p>Snow: A StandardScaler to scale the snow features in snow_cols.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.load_trained_model">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">load_trained_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.load_trained_model" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Load a trained model from disk using pickle deserialization.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The path where the trained model is located.</p>
+</dd>
+<dt>Returns:</dt><dd><p>object: The loaded model object.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.models.save_trained_model">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.models.</span></span><span class="sig-name descname"><span class="pre">save_trained_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.models.save_trained_model" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Save a trained model to disk using pickle serialization.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>model (object): The trained model object to be saved.
+path (str): The path where the model will be saved.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-malbecs.modeling.train">
@@ -236,18 +354,6 @@ meteo_path (str, optional): Path to the meteorological data CSV file. Defaults t
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="malbecs.modeling.train.load_trained_model">
-<span class="sig-prename descclassname"><span class="pre">malbecs.modeling.train.</span></span><span class="sig-name descname"><span class="pre">load_trained_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.train.load_trained_model" title="Permalink to this definition"></a></dt>
-<dd><p>Load a trained model from disk using pickle deserialization.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>path (str): The path where the trained model is located.</p>
-</dd>
-<dt>Returns:</dt><dd><p>object: The loaded model object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="malbecs.modeling.train.load_xy">
 <span class="sig-prename descclassname"><span class="pre">malbecs.modeling.train.</span></span><span class="sig-name descname"><span class="pre">load_xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eto_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meteo_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_camp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">14</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_camp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.train.load_xy" title="Permalink to this definition"></a></dt>
 <dd><p>Load and preprocess data from different sources and returns training features and targets.</p>
@@ -287,19 +393,6 @@ meteo_data (pd.DataFrame, optional): The pandas dataframe containing meteorologi
 y_pred (array-like of shape (n_samples,)): Estimated target values.</p>
 </dd>
 <dt>Returns:</dt><dd><p>float: The RMSE between <cite>y_true</cite> and <cite>y_pred</cite>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="malbecs.modeling.train.save_trained_model">
-<span class="sig-prename descclassname"><span class="pre">malbecs.modeling.train.</span></span><span class="sig-name descname"><span class="pre">save_trained_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.modeling.train.save_trained_model" title="Permalink to this definition"></a></dt>
-<dd><p>Save a trained model to disk using pickle serialization.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>model (object): The trained model object to be saved.
-path (str): The path where the model will be saved.</p>
-</dd>
-<dt>Returns:</dt><dd><p>None</p>
 </dd>
 </dl>
 </dd></dl>
