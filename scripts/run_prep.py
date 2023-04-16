@@ -16,6 +16,7 @@ def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo
     logger = logging.getLogger(os.path.basename(__file__))
 
     logger.info('Starting preprocessing...')
+    logger.info("Virtual memory percent usage: " + str(psutil.virtual_memory().percent))
 
     logger.info(f'Loading {wine_raw}')
     wine_data = wine_pr.load_wine_dataset(wine_raw)
@@ -30,10 +31,9 @@ def run_preprocessing(wine_raw, wine_final, eto_raw, eto_final, meteo_raw, meteo
         wine_data, output_path=wine_final
     )
 
-
     logger.info(
         f'Processed {wine_raw} saved to {wine_final}.')
-    logger.info("virtual memory percent start: " + str(psutil.virtual_memory().percent))
+    logger.info("Virtual memory percent usage: " + str(psutil.virtual_memory().percent))
 
     logger.info(f'Loading {eto_raw}')
     eto_data = eto_pr.load_eto_dataset(eto_raw)
