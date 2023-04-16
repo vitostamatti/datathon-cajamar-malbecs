@@ -14,7 +14,6 @@
 - [Contenido](#contenido)
 - [Problema ](#problema-)
 - [Idea / Solucion ](#idea--solucion-)
-  - [Limitaciones ](#limitaciones-)
   - [Trabajo Futuro ](#trabajo-futuro-)
 - [Setup ](#setup-)
   - [1. Pre-Requisitos](#1-pre-requisitos)
@@ -87,6 +86,8 @@ Instalar `malbecs` (libreria propia)
 ```
 $ (venv) pip install -e ./src/
 ```
+
+Para mas detalle sobre la libreria malbecs, puede acceder a la documentacion disponible en [`pydocs`](/pydocs/build/html/index.html)
 
 ### 4. Datos Iniciales
 
