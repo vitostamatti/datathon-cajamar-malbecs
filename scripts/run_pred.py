@@ -7,6 +7,7 @@ import logging
 import logging.config
 import argparse
 
+from memory_profiler import profile
 
 parser = argparse.ArgumentParser(
     prog='Predicciones',
@@ -43,7 +44,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-
+@profile
 def run_pred(wine_path, eto_path, meteo_path, model_path, preds_path):
 
     logger = logging.getLogger(os.path.basename(__file__))

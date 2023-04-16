@@ -17,6 +17,9 @@ from malbecs.preprocess import meteo as meteo_pr
 import logging
 import logging.config
 
+
+from memory_profiler import profile
+
 seed = 42
 
 parser = argparse.ArgumentParser(
@@ -52,7 +55,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-
+@profile
 def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
 
     logger = logging.getLogger(os.path.basename(__file__))

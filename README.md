@@ -149,6 +149,12 @@ Si quiere mas informacion sobre los parametros utilizados, ejecutar el siguiente
 $ (venv) python ./scripts/<script.py> --help
 ```
 
+Si quiere ejecutar el script obteniendo informacion de la utilizaicon de memoria, ejecutar el siguiente comando.
+
+```bash
+$ (venv) python -m memory_profiler ./scripts/<script.py>
+```
+
 Cada script cuenta con un log de ejecucion que muestra por consola los
 pasos realizados.
 

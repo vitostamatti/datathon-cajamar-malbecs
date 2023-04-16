@@ -65,7 +65,6 @@ def get_final_model_num_features():
 
 
 def get_preprocesing_fase_nacional():
-
     """Pipeline final para fase nacional"""
 
     model_num_cols = get_final_model_num_features()
