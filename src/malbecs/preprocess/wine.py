@@ -80,19 +80,6 @@ def process_altitud(data):
 
     
 def add_std_superficie(wine_data):
-    """
-    Computes the standard deviation of the 'superficie' column for each combination of 'id_finca', 'variedad',
-    and 'modo' in the input dataframe and adds it as a new column 'std_superficie' to the dataframe. Also adds
-    a new boolean column 'std_superficie_null' which indicates if the 'std_superficie' value is 0.
-
-    Args:
-        wine_data (pandas.DataFrame): The input dataframe to add the 'std_superficie' column to.
-
-    Returns:
-        pandas.DataFrame: The input dataframe with the 'std_superficie' and 'std_superficie_null' columns added.
-    """
-
-    # compute the standard deviation of 'superficie' for each combination of 'id_finca', 'variedad', and 'modo'
     std_sup = wine_data.dropna(subset=['superficie']).groupby(
         ['id_finca','variedad','modo']
     )['superficie'].std().fillna(0).rename("std_superficie")

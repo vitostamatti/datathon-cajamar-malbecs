@@ -51,28 +51,11 @@ En cuanto a los modelos analizados y seleccionados, se hizo una prueba de multip
 
 Como resultado, se opto por utilizar un algoritmo de Random Forest clasico, con una busqueda de parametros utilizando periodos de 2019, 2020 y 2021 para evaluar los resultados. Para esta tarea se crearon objectos customizados de validacion cruzada y de transformacion.
 
-### Limitaciones <a name = "limitaciones"></a>
-
-La limitacion principal de la presente entrega es el tiempo. Debido a
-restricciones de tiempo el equipo se vio en la necesidad de tomar decisiones
-de manera agil y, en algunas situaciones, sin la posibilidad de evaluar
-diferentes escenarios.
-
-Nuestro mayor punto de dolor es la falta de explotacion de las variables
-relacionadas al clima. Por motivos ya mencionados, no llegaron a ser
-analizadas en profundidad y, por ende, no fueron seleccionadas para
-el modelo de esta entrega.
-
 ### Trabajo Futuro <a name = "futuro"></a>
 
-Dentro de las ideas futuras y posibles cambios, podriamos mencionar dos principales.
-
-La incorporacion de variables climaticas al modelo: Es conocida la relacion y el impacto que tiene el factor climatico sobre la produccion de vino. El mayor desfio es la incorporacion de una variable con alta granularidad temporal a un dataset con granularidad anual. El equipo sostiene que la correcta incorporacion de estas variables, deberia ayudar a una mejora de los resultados.
+Dentro de las ideas futuras y posibles cambios, podriamos mencionar uno principal.
 
 La imputacion de la variable superficie con estrategias mas apropiada: la variable superficie juega un rol escencial en la produccion final de una finca. Dada su relevancia, la imputacion por promedios agrupados puede arrojar resultados erroneos en aquellos casos donde la finca haya modificado su superficie o su distribcion entre las distintas variedades. Se tuvo muy en cuenta este punto, y se intentaron llevar a cabo otras imputaciones mas complejas, a partir de modelos de regresion. Sin embargo los resultados no llegaron a ser lo sufcientemente explorados para su adoptacion. Sostenemos que, con mas tiempo y dedicacion, la mejora en la imputacion de esta variable deberai arrojar una mejora en los resultados.
-
-Ambos puntos fueron explorados durante esta primer fase, aunque sin arrojar
-resultados notablemente mejores, por lo que se opto por no incorporarlos.
 
 ## Setup <a name = "setup"></a>
 
@@ -119,7 +102,7 @@ Es necesario para la ejecucion del codigo, contar con los datos de origen.
 
 La entrega cuenta con dos _scripts_ y con dos formatos de ejecution. El _script_ de exploracion, y el _script_ de prediccion. Los formatos de ejecucion son: `notebooks` y `.py`.
 
-En el directorio de [`./notebooks`](./notebooks) se encuentra la entega en formato `.ipynb` tanto para la exploracion y analisis de datos como para el entrenamiento y prediccion del modelo para esta primera fase.
+En el directorio de [`./notebooks`](./notebooks) se encuentra la entrega en formato `.ipynb` tanto para la exploracion y analisis de datos como para el entrenamiento y prediccion del modelo para esta primera fase.
 
 En el directorio [`./scripts`](./scripts) se encuentran los scripts necesarios para la ejecucion de las diferentes transformaciones de datos, el entrenamiento del modelo final seleccionado para esta fase, y la generacion de predicciones.
 
@@ -127,12 +110,15 @@ Ademas, en el directorio [/docs](./docs/) se encuentra una presentacion resumen 
 
 ### Presentacion
 
-La presentacion [Datathon Cajamar 2023 - Malbecs - Fase Local](./docs/Datathon%20Cajamar%202023%20-%20Malbecs%20-%20Fase%20Local.pdf) es un resumen de la presente entrega, donde se
-comentan alguans de las tecnicas utilizadas, como asi tambien los resultados obtenidos en terminos generales.
+La presentacion [Datathon Cajamar 2023 - Malbecs - Fase Nacional](./docs/Datathon%20Cajamar%202023%20-%20Malbecs%20-%20Fase%20Nacional.pdf) es un resumen de la presente entrega, donde se comentan algunas de las tecnicas utilizadas, como asi tambien los resultados obtenidos en terminos generales.
 
 ### Notebooks
 
 -   [01-Exploracion-Malbecs](/notebooks/01-Exploracion-Malbecs.ipynb): se detalla el propceso de exploracion y visualizacion inicial de los datos, como asi tambien las primeras decisiones sobre tratamiento de variables, generacion y utilizacion de las mismas.
+
+Dentro de este, se encuentran comentados y analizados los nuevos conceptos a tener en cuenta en la entrega: **Transparencia, Explicabilidad, Sostenibilidad y Justicia**
+Para justicia y explicabilidad hemos creado apartados en este script de prediccion, mientras que para sostenibilidad hemos decorado los archivos .py ejecutables con memorias que entregan el consumo energetico y computacional. Por último, para asegurar una transparencia en nuestro código y modelo, generamos la documentación pertinente para todas las funciones creadas, generamos los comentarios necesarios en los notebooks, y creamos un dashboard adjunto en PowerBi para analizar las producciones y errores en un mayor grado de detalle.
+
 -   [02-Prediccion-Malbecs](/notebooks/02-Prediccion-Malbecs.ipynb): se detalla el paso a paso del preprocesamiento y la ingenieria de variables realizada, como asi tambien el entrenamiento y evaluacion del modelo seleccionado.
 
 ### Scripts
