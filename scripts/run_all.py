@@ -126,6 +126,7 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
     logger.info("Running predictions for 2022")
     
     data_final = tr.filter_camp(data, min_camp=22, max_camp=22)
+    
     X_final, _ = tr.xy_split(data_final)
     X_final = tr.convert_cat_features(X_final)
 
