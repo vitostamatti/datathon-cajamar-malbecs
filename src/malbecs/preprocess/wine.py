@@ -80,46 +80,69 @@ def process_altitud(data):
 
     
 def add_std_superficie(wine_data):
-
     std_sup = wine_data.dropna(subset=['superficie']).groupby(
         ['id_finca','variedad','modo']
     )['superficie'].std().fillna(0).rename("std_superficie")
+
+    # merge the computed standard deviation with the input dataframe
     wine_data = wine_data.merge(
-            std_sup,
-            left_on=['id_finca','variedad','modo'],
-            right_on=['id_finca','variedad','modo'],
-            how='left'
-        )
+        std_sup,
+        left_on=['id_finca','variedad','modo'],
+        right_on=['id_finca','variedad','modo'],
+        how='left'
+    )
+
+    # add a boolean column 'std_superficie_null' which indicates if the 'std_superficie' value is 0
     wine_data['std_superficie_null'] = wine_data['std_superficie'] == 0
+
     return wine_data
 
+
 def preproces_wine_data(wine_data, fillna_alt=True, fillna_sup=True, output_path=None):
-    # load data
+    """
+    Preprocesses the input wine data by performing various data cleaning and imputation operations.
+
+    Args:
+        wine_data (pandas.DataFrame): The input wine data to preprocess.
+        fillna_alt (bool): Whether to impute missing values in the 'altitud' column using group-wise mean imputation.
+        fillna_sup (bool): Whether to impute missing values in the 'superficie' column using group-wise mean imputation.
+        output_path (str): The file path to save the preprocessed data to. Defaults to None.
+
+    Returns:
+        pandas.DataFrame: The preprocessed wine data.
+    """
+
+    # normalize the columns of the input data
     wine_data = norm_columns(wine_data)
+
+    # process the 'altitud' column to convert strings to floats and compute mean values
     wine_data = process_altitud(wine_data)
-    wine_data = replace_zeros_with_na(
-        wine_data, cols=['superficie', 'altitud'])
 
-    # fill nulls
+    # replace zeros with NaN values in the 'superficie' and 'altitud' columns
+    wine_data = replace_zeros_with_na(wine_data, cols=['superficie', 'altitud'])
+
+    # impute missing values in the 'altitud' column using group-wise mean imputation
     if fillna_alt:
-        wine_data = fillna_by_group(
-            wine_data, cols=['altitud'], group=['id_estacion'])
+        wine_data = fillna_by_group(wine_data, cols=['altitud'], group=['id_estacion'])
 
+    # add a 'std_superficie' column to the dataframe which represents the standard deviation of the 'superficie'
+    # column for each combination of 'id_finca', 'variedad', and 'modo'
     wine_data = add_std_superficie(wine_data)
 
+    # impute missing values in the 'superficie' column using group-wise mean imputation
     if fillna_sup:
+        # create a new column 'sup_is_nan' which is 0 if 'superficie' is not NaN, and 1 otherwise
         wine_data['sup_is_nan'] = wine_data['superficie'].apply(lambda x: 0 if x > 0 else x)
         wine_data['sup_is_nan'] = wine_data['sup_is_nan'].replace(np.nan, 1)
-        
-        
+
+        # impute missing values in 'superficie' using group-wise mean imputation for various groups
         wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['id_finca', 'variedad', 'modo'])
-        # wine_data['superficie'] = wine_data['superficie'].fillna(-1)
         wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['id_zona', 'variedad', 'modo'])
         wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['id_estacion', 'variedad', 'modo'])
         wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['variedad', 'modo'])
         wine_data = fillna_by_group(wine_data, cols=['superficie'], group=['variedad'])
 
-    # save
+    # save the preprocessed data to a file if an output path is provided
     if output_path:
         wine_data.to_csv(output_path, index=False)
 

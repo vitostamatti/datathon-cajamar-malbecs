@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>malbecs.feateng &mdash; malbecs 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="malbecs.modeling" href="malbecs.modeling.html" />
+    <link rel="prev" title="malbecs" href="malbecs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            malbecs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Malbecs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">malbecs.feateng</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-malbecs.feateng.eto">malbecs.feateng.eto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-malbecs.feateng.features_eng">malbecs.feateng.features_eng</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-malbecs.feateng.wine">malbecs.feateng.wine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.modeling.html">malbecs.modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.preprocess.html">malbecs.preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.utils.html">malbecs.utils package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">malbecs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="malbecs.html">malbecs</a></li>
+      <li class="breadcrumb-item active">malbecs.feateng</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/malbecs.feateng.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="malbecs-feateng">
+<h1>malbecs.feateng<a class="headerlink" href="#malbecs-feateng" title="Permalink to this heading"></a></h1>
+<p>This package provides various utilities for handling missing values, transforming variables, creating new features, and more.</p>
+<section id="module-malbecs.feateng.eto">
+<span id="malbecs-feateng-eto"></span><h2>malbecs.feateng.eto<a class="headerlink" href="#module-malbecs.feateng.eto" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.eto.feateng_eto">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">feateng_eto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.feateng_eto" title="Permalink to this definition"></a></dt>
+<dd><p>Performs feature engineering on a pandas DataFrame containing ETO data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data: The input DataFrame containing ETO data.
+output_path: Optional string representing the path to save the output DataFrame as a CSV file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A pandas DataFrame with engineered features for precipitation and snow data. The new columns include
+‘MeanPrecip’, ‘TotalPrecip’, ‘StdlPrecip’, ‘MeanSnow’, and ‘TotalSnow’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.eto.get_mean_features">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">get_mean_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.get_mean_features" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the mean value of a set of features for each row in a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): the input DataFrame.
+features (list): a list of column names to be used to calculate the mean.
+name (str): the name of the new column that will store the mean value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: a copy of the input DataFrame with an additional column storing the mean value of the specified features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.eto.get_std_features">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">get_std_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.get_std_features" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the standard deviation of a set of features for each row in a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): the input DataFrame.
+features (list): a list of column names to be used to calculate the standard deviation.
+name (str): the name of the new column that will store the standard deviation value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: a copy of the input DataFrame with an additional column storing the standard deviation value of the specified features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.eto.get_total_features">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.eto.</span></span><span class="sig-name descname"><span class="pre">get_total_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.eto.get_total_features" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the total value of a set of features for each row in a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): the input DataFrame.
+features (list): a list of column names to be used to calculate the total.
+name (str): the name of the new column that will store the total value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: a copy of the input DataFrame with an additional column storing the total value of the specified features.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-malbecs.feateng.features_eng">
+<span id="malbecs-feateng-features-eng"></span><h2>malbecs.feateng.features_eng<a class="headerlink" href="#module-malbecs.feateng.features_eng" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.features_eng.above_mean_col">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">above_mean_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.above_mean_col" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new binary column in a pandas DataFrame indicating whether the values in a given column
+are above or below the mean production value of the rows in the DataFrame where the ‘campaña’ column
+does not equal 21.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame to use for creating the new column.
+col (str): The name of the column to use for calculating the new binary column.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with a new binary column indicating whether the values in
+the specified column are above or below the mean production value of the rows where ‘campaña’ does not
+equal 21.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.features_eng.df_for_fe">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">df_for_fe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.df_for_fe" title="Permalink to this definition"></a></dt>
+<dd><p>Filter out rows in a pandas DataFrame where the ‘campaña’ column equals 21.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame to filter.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The filtered DataFrame with rows where ‘campaña’ equals 21 removed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.features_eng.eto_annual_mean">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">eto_annual_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.eto_annual_mean" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the annual mean of various weather variables based on a DataFrame containing weather data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pandas.DataFrame): The DataFrame containing weather data.
+cols_list (list): A list of strings indicating which weather variables to average.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with additional columns representing the annual mean
+of the specified weather variables, and with the original columns for those variables dropped.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.features_eng.eto_annual_sum">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">eto_annual_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.eto_annual_sum" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the annual sum of various weather variables based on a DataFrame containing weather data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pandas.DataFrame): The DataFrame containing weather data.
+cols_list (list): A list of strings indicating which weather variables to sum.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with additional columns representing the annual sum
+of the specified weather variables, and with the original columns for those variables dropped.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.features_eng.eto_dict_generator">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">eto_dict_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.eto_dict_generator" title="Permalink to this definition"></a></dt>
+<dd><p>Generates a dictionary of column names for various weather variables based on a DataFrame containing
+weather data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>df (pandas.DataFrame): The DataFrame containing weather data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict: A dictionary where each key is a string indicating a weather variable and each value is a list
+of column names in the DataFrame that contain data for that weather variable.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.features_eng.quantiles_col">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.features_eng.</span></span><span class="sig-name descname"><span class="pre">quantiles_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.features_eng.quantiles_col" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a new categorical column in a pandas DataFrame based on the quartiles of the production values
+for each unique value in a given column.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame to use for creating the new column.
+col (str): The name of the column to use for grouping and calculating quartiles.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with a new categorical column indicating which quartile
+the production value for each row falls into, based on the quartiles of the production values for
+each unique value in the specified column.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-malbecs.feateng.wine">
+<span id="malbecs-feateng-wine"></span><h2>malbecs.feateng.wine<a class="headerlink" href="#module-malbecs.feateng.wine" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.feateng_wine_data">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">feateng_wine_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.feateng_wine_data" title="Permalink to this definition"></a></dt>
+<dd><p>Applies a series of feature engineering transformations to the wine_data dataframe and returns the resulting
+transformed dataframe.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data: A pandas dataframe containing wine production data.
+output_path: Optional string indicating the path where the transformed dataframe should be saved.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A pandas dataframe with the transformed wine production data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_historic_prod_he_by_var_modo">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_historic_prod_he_by_var_modo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_historic_prod_he_by_var_modo" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the historic mean and standard deviation of prod_he_shift1 by variety and mode for all periods in the dataset.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data: DataFrame containing the wine data</p>
+</dd>
+<dt>Returns:</dt><dd><p>DataFrame containing the historic mean and standard deviation of prod_he_shift1 by variety and mode for all periods in the dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_historic_prod_he_by_var_modo_modo_zona">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_historic_prod_he_by_var_modo_modo_zona</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_historic_prod_he_by_var_modo_modo_zona" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a DataFrame with the historic mean production of <cite>prod_he</cite> grouped by
+<cite>variedad</cite>, <cite>modo</cite>, <cite>modo_zona</cite>, and <cite>campaña</cite> for each year between the minimum and maximum
+years in <cite>wine_data</cite>.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>wine_data (pd.DataFrame): The input DataFrame containing wine production data.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: A DataFrame with the historic mean production of <cite>prod_he</cite> grouped by</dt><dd><p><cite>variedad</cite>, <cite>modo</cite>, <cite>modo_zona</cite>, and <cite>campaña</cite> for each year between the minimum and maximum
+years in <cite>wine_data</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_n_var_finca_camp">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_n_var_finca_camp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_n_var_finca_camp" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the number of unique varieties for each farm and campaign based on a DataFrame containing farm data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame containing farm data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with an additional column representing the number of unique crop varieties
+for each farm and campaign, and merged with a separate DataFrame containing the same information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_production_change_by_estacion">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_production_change_by_estacion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_production_change_by_estacion" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the mean production change by season for each station.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pd.DataFrame): A pandas DataFrame containing wine production data.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: A pandas DataFrame containing the mean production change by season</dt><dd><p>for each station.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_production_changes">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_production_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_production_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates several production changes based on shifted values in the provided wine data DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pd.DataFrame): The wine data DataFrame.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: The updated wine data DataFrame, with the following new columns:</dt><dd><ul class="simple">
+<li><p>prod_shift1_gt_shift2: A binary column (1 or 0) indicating whether the value in the prod_shift1 column is
+greater than the value in the prod_shift2 column.</p></li>
+<li><p>prod_shift_max: A column indicating the maximum value between prod_shift1 and prod_shift2.</p></li>
+<li><p>prod_shift_change: A column indicating the difference between prod_shift1 and prod_shift2.</p></li>
+<li><p>prod_shift_avg: A column indicating the average between prod_shift1 and prod_shift2, or prod_shift1 if
+prod_shift2 is missing (-1).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production" title="Permalink to this definition"></a></dt>
+<dd><p>Shifts the production column of the input wine_data DataFrame for each combination of id_finca, variedad, and modo,
+by two periods, and adds two new columns, prod_shift1 and prod_shift2, with the shifted values. If there is no
+value to shift, the corresponding value in prod_shift1 or prod_shift2 is replaced with -1.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pd.DataFrame): DataFrame containing the data to shift.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The input wine_data DataFrame with two new columns, prod_shift1 and prod_shift2.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_by_finca">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_by_finca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_by_finca" title="Permalink to this definition"></a></dt>
+<dd><p>Given a pandas DataFrame with wine production data, returns a new DataFrame with additional columns for
+shifted production values.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pandas DataFrame): The input DataFrame with columns ‘campaña’, ‘id_finca’, and ‘produccion’.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pandas DataFrame: A new DataFrame with the same columns as the input DataFrame plus two additional columns,</dt><dd><p>‘prod_finca_shift_1’ and ‘prod_finca_shift_2’, which contain the production values for each ‘id_finca’
+shifted by 1 and 2 rows, respectively. If there is no data available for a given ‘id_finca’ for the shifted
+rows, the corresponding value will be -1.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_by_var">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_by_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_by_var" title="Permalink to this definition"></a></dt>
+<dd><p>Given a pandas DataFrame with wine production data, returns a new DataFrame with additional columns for
+shifted production values.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pandas DataFrame): The input DataFrame with columns ‘campaña’, ‘id_finca’, ‘variedad’, and ‘produccion’.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pandas DataFrame: A new DataFrame with the same columns as the input DataFrame plus two additional columns,</dt><dd><p>‘prod_var_shift_1’ and ‘prod_var_shift_2’, which contain the production values for each finca and variety
+shifted by 1 and 2 rows, respectively. If there is no data available for a given finca and variety combination
+for the shifted rows, the corresponding value will be -1.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_he">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_he" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the production per hectare shift columns for the input wine_data DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pd.DataFrame): The input DataFrame containing the wine production data.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: The input wine_data DataFrame with the production per hectare shift columns</dt><dd><p>added (prod_he_shift1 and prod_he_shift2).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_he_by_var">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_he_by_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_he_by_var" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the mean and standard deviation of prod_he_shift1 and the difference between the means of prod_he_shift1 and prod_he_shift2
+by variety and campaign.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data: DataFrame containing the wine data</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>DataFrame containing the mean and standard deviation of prod_he_shift1 and the difference between the means of prod_he_shift1 and prod_he_shift2</dt><dd><p>by variety and campaign</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_he_by_var_modo">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_he_by_var_modo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_he_by_var_modo" title="Permalink to this definition"></a></dt>
+<dd><p>Calculate shifted production HE by variety and mode and return the updated wine_data 
+DataFrame with new columns.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data: a Pandas DataFrame with columns ‘campaña’, ‘variedad’, ‘modo’, ‘prod_he_shift1’, and ‘prod_he_shift2’</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>A Pandas DataFrame with the same columns as wine_data plus additional columns ‘prod_he_var_modo_mean_shift1’,</dt><dd><p>‘prod_he_var_modo_std_shift1’, and ‘prod_he_var_modo_change’. The ‘prod_he_var_modo_mean_shift1’ column represents 
+the mean production HE for each variety and mode in the previous year (i.e., ‘prod_he_shift1’ column).
+The ‘prod_he_var_modo_std_shift1’ column represents the standard deviation of the production HE for each variety 
+and mode in the previous year. The ‘prod_he_var_modo_change’ column represents the difference in mean 
+production HE between the current year and the previous year for each variety and mode.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_he_by_var_modo_zona">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_he_by_var_modo_zona</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_he_by_var_modo_zona" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the mean and standard deviation of the prod_he_shift1 column grouped by the campaign,
+variety, mode and zone, calculates the difference between the means of prod_he_shift1 and prod_he_shift2, 
+and merges the results into the original wine_data DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pandas.DataFrame): The input DataFrame containing wine production data.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pandas.DataFrame: The merged DataFrame containing the mean and standard deviation of the prod_he_shift1 </dt><dd><p>column, the difference between the means of prod_he_shift1 and prod_he_shift2, grouped by the campaign,
+variety, mode and zone, and the original wine production data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_he_by_zone">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_he_by_zone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_he_by_zone" title="Permalink to this definition"></a></dt>
+<dd><p>Compute the mean and standard deviation of prod_he_shift1 and the difference between the means of prod_he_shift1 and prod_he_shift2
+by zone and campaign.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data: DataFrame containing the wine data</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>DataFrame containing the mean and standard deviation of prod_he_shift1 and the difference between the means of prod_he_shift1 and prod_he_shift2</dt><dd><p>by zone and campaign</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_production_he_changes">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_production_he_changes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_production_he_changes" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the changes in the hectare yield of the wine data by comparing 
+the hectare yields of the current and previous two years. Adds two columns 
+to the input DataFrame: ‘prod_he_shift_change’ with the difference in the 
+hectare yields, and ‘prod_he_shift_avg’ with the average hectare yield between 
+the current and previous year.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>wine_data (pd.DataFrame): DataFrame with the following columns: </dt><dd><p>‘campaña’, ‘id_finca’, ‘variedad’, ‘modo’, ‘superficie’, and ‘produccion’. 
+‘superficie’ and ‘produccion’ are used to calculate the hectare yield.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: The input DataFrame with two additional columns: </dt><dd><p>‘prod_he_shift_change’ and ‘prod_he_shift_avg’.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_shifted_superficie">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_shifted_superficie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_shifted_superficie" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a pandas DataFrame with two new columns indicating the shifted values of the “superficie” column of the input
+DataFrame. The shifting is performed based on the values of the “id_finca”, “variedad”, and “modo” columns.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pd.DataFrame): Input pandas DataFrame with columns “id_finca”, “variedad”, “modo”, and “superficie”.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: Output pandas DataFrame with two new columns “sup_shift1” and “sup_shift2” indicating the shifted</dt><dd><p>values of the “superficie” column. The NaN values in the shifted columns are filled with -1.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_sup_tot_camp_finca">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_sup_tot_camp_finca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_sup_tot_camp_finca" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the total surface area for each farm and campaign based on a DataFrame containing farm data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame containing farm data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with an additional column representing the total surface area
+for each farm and campaign, and merged with a separate DataFrame containing the same information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_sup_tot_finca">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_sup_tot_finca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_sup_tot_finca" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the total surface area for each farm based on a DataFrame containing farm data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The DataFrame containing farm data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The original DataFrame with an additional column representing the mean total surface area
+for each farm, and merged with a separate DataFrame containing the same information.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.feateng.wine.get_total_prod_from_he">
+<span class="sig-prename descclassname"><span class="pre">malbecs.feateng.wine.</span></span><span class="sig-name descname"><span class="pre">get_total_prod_from_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.feateng.wine.get_total_prod_from_he" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a pandas DataFrame with new columns indicating the total production of each column ending with “_he”,
+calculated by multiplying it by the “superficie” column.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pd.DataFrame): Input pandas DataFrame with columns ending with “_he” and “superficie”.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: Output pandas DataFrame with new columns ending with “_he_total” indicating the total production</dt><dd><p>of each column ending with “_he” after multiplying it by the “superficie” column.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="malbecs.html" class="btn btn-neutral float-left" title="malbecs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="malbecs.modeling.html" class="btn btn-neutral float-right" title="malbecs.modeling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, malbecs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>malbecs.preprocess &mdash; malbecs 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="malbecs.utils package" href="malbecs.utils.html" />
+    <link rel="prev" title="malbecs.modeling" href="malbecs.modeling.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            malbecs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="readme.html">About Malbecs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="malbecs.html">malbecs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="malbecs.feateng.html">malbecs.feateng</a></li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.modeling.html">malbecs.modeling</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">malbecs.preprocess</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-malbecs.preprocess.eto">malbecs.preprocess.eto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-malbecs.preprocess.meteo">malbecs.preprocess.meteo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-malbecs.preprocess.wine">malbecs.preprocess.wine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="malbecs.utils.html">malbecs.utils package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">malbecs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="malbecs.html">malbecs</a></li>
+      <li class="breadcrumb-item active">malbecs.preprocess</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/malbecs.preprocess.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="malbecs-preprocess">
+<h1>malbecs.preprocess<a class="headerlink" href="#malbecs-preprocess" title="Permalink to this heading"></a></h1>
+<p>This package provides various utilities for loading, cleaning and preprocesing raw data.</p>
+<section id="module-malbecs.preprocess.eto">
+<span id="malbecs-preprocess-eto"></span><h2>malbecs.preprocess.eto<a class="headerlink" href="#module-malbecs.preprocess.eto" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.add_year_and_month">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">add_year_and_month</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.eto.add_year_and_month" title="Permalink to this definition"></a></dt>
+<dd><p>Adds the ‘year’ and ‘month’ columns to a dataframe with a ‘date’ column.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto: A pandas DataFrame containing a ‘date’ column.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A pandas DataFrame with added ‘year’ and ‘month’ columns.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.filter_relevant_months">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">filter_relevant_months</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">months</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.filter_relevant_months" title="Permalink to this definition"></a></dt>
+<dd><p>Filters relevant months from eto_month DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_month (pd.DataFrame): DataFrame with monthly data.
+months (list): List of months to filter (default is [1, 2, 3, 4, 5, 6]).</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame with relevant months.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.flatten_pivot_columns">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">flatten_pivot_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_pivot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.flatten_pivot_columns" title="Permalink to this definition"></a></dt>
+<dd><p>Flattens the columns of a pivot table DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_pivot (pd.DataFrame): Pivot table DataFrame to flatten columns.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: Flattened DataFrame with new column names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_data_for_mean_group">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_data_for_mean_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.get_data_for_mean_group" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a new DataFrame with columns for the specified <cite>cols_mean</cite> that have been aggregated by mean for each group
+of columns specified in <cite>cols_ids</cite>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto (pd.DataFrame): The DataFrame containing the ETO data.
+cols_mean (List[str]): A list of column names to aggregate by mean.
+cols_ids (List[str]): A list of column names that should be used to group by.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A new DataFrame containing the mean aggregated data for each group of <cite>cols_ids</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_data_for_sum_group">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_data_for_sum_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_sum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.eto.get_data_for_sum_group" title="Permalink to this definition"></a></dt>
+<dd><p>Return a pandas dataframe with the sum of the specified columns by day, along with the columns used to identify each row.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto (pandas.DataFrame): A pandas dataframe with the ETo data and columns to be summed by day.
+cols_sum (list): A list of strings with the names of the columns to be summed by day.
+cols_ids (list): A list of strings with the names of the columns to identify each row.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: A pandas dataframe with the sum of the specified columns by day, along with the columns used to identify each row.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_days_over_and_under_features">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_days_over_and_under_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.eto.get_days_over_and_under_features" title="Permalink to this definition"></a></dt>
+<dd><p>This function extracts and aggregates features from the ETO data using the get_days_over_and_under_mean function, 
+and then applies some additional data processing steps.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data (pandas.DataFrame): The ETO data containing weather information.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pandas.DataFrame extracted and aggregated features from the ETO data.Each row represents a unique combination of year and month, </dt><dd><p>and each column represents a different feature. The features are as follows.
+- TempOverMean: number of days in the month where TemperatureLocalDayAvg was above the monthly mean
+- TempUnderMean: number of days in the month where TemperatureLocalDayAvg was below the monthly mean
+- PrecipUnderMean: number of days in the month where PrecipAmountLocalDayAvg was below the monthly mean
+- SnowUnderMean: number of days in the month where SnowAmountLocalDayAvg was below the monthly mean
+- WindUnderMean: number of days in the month where WindSpeedLocalDayAvg was below the monthly mean
+- GustUnderMean: number of days in the month where GustLocalDayAvg was below the monthly mean
+- PrecipOverZero: number of days in the month where PrecipAmountLocalDayAvg was greater than zero
+- SnowOverZero: number of days in the month where SnowAmountLocalDayAvg was greater than zero
+- WindOverZero: number of days in the month where WindSpeedLocalDayAvg was greater than zero
+- GustOverZero: number of days in the month where GustLocalDayAvg was greater than zero</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_days_over_and_under_mean">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_days_over_and_under_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">under</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.get_days_over_and_under_mean" title="Permalink to this definition"></a></dt>
+<dd><p>Get number of days over and/or under 1 and 2 standard deviations from the monthly mean for a given column.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto_data: pandas DataFrame containing data for the column of interest (e.g. ETo)
+column: str, name of the column of interest
+out_column_name: str, prefix for the output column names
+over: bool, whether to include count of days over 1 and 2 standard deviations (default: True)
+under: bool, whether to include count of days under 1 and 2 standard deviations (default: True)</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pandas DataFrame with the following columns:</dt><dd><ul class="simple">
+<li><p>ID_ESTACION: station ID</p></li>
+<li><p>year: year of the data</p></li>
+<li><p>month: month of the data</p></li>
+<li><p>Under1Std: number of days under 1 standard deviation from the monthly mean</p></li>
+<li><p>Over1Std: number of days over 1 standard deviation from the monthly mean</p></li>
+<li><p>Under2Std: number of days under 2 standard deviations from the monthly mean</p></li>
+<li><p>Over2Std: number of days over 2 standard deviations from the monthly mean</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_mean_and_std_by_month">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_mean_and_std_by_month</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.get_mean_and_std_by_month" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the mean and standard deviation of a column in a DataFrame by month and station.</p>
+<p>The function calculates the mean and standard deviation of a specific column in a DataFrame by grouping the data by
+month and station.</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>eto_data (pd.DataFrame): A pandas DataFrame containing ETO data with the following columns:</dt><dd><ul class="simple">
+<li><p>ID_ESTACION (int): The ID of the station the data corresponds to.</p></li>
+<li><p>date (pd.Timestamp): The date the data corresponds to.</p></li>
+<li><p>Other columns: Columns with the ETO values.</p></li>
+</ul>
+</dd>
+</dl>
+<p>column (str): The name of the column for which to calculate the mean and standard deviation.</p>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: A DataFrame with the following columns:</dt><dd><ul class="simple">
+<li><p>ID_ESTACION (int): The ID of the station the data corresponds to.</p></li>
+<li><p>month (int): The month the data corresponds to.</p></li>
+<li><p>mean (float): The mean value of the column for the given station and month.</p></li>
+<li><p>std (float): The standard deviation of the column for the given station and month.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_monthly_data">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_monthly_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_sum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.get_monthly_data" title="Permalink to this definition"></a></dt>
+<dd><p>Returns monthly data by calculating mean and sum of specified columns.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto (pd.DataFrame): DataFrame with data to be grouped by year and month.
+cols_mean (list): List of column names to calculate mean.
+cols_sum (list): List of column names to calculate sum.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: DataFrame with calculated mean and sum for specified columns grouped by year and month.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_totals_by_day">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_totals_by_day</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.eto.get_totals_by_day" title="Permalink to this definition"></a></dt>
+<dd><p>Get the total values of the given columns in eto dataframe by day.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto (pd.DataFrame): The dataframe containing the data to be processed.
+cols (list of str): The list of column names for which the total is to be calculated.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A new dataframe containing the total values for the given columns, multiplied by 24.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.get_totals_by_daytime_and_nighttime">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">get_totals_by_daytime_and_nighttime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.get_totals_by_daytime_and_nighttime" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the totals for a list of columns for daytime and nighttime readings in a dataframe.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto: A pandas DataFrame containing columns for daytime and nighttime readings.
+cols: A list of column names in the dataframe.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A pandas DataFrame with added columns containing the total values for daytime and nighttime readings.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.load_eto_dataset">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">load_eto_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.load_eto_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Loads a dataset from a file and returns it as a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The path to the dataset file to load.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The loaded dataset as a pandas DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.parse_date">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">parse_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.parse_date" title="Permalink to this definition"></a></dt>
+<dd><p>Convert the date column in a pandas DataFrame to a datetime object.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>eto (pd.DataFrame): The dataset containing the date column.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The dataset with the date column converted to a datetime object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.pivot_monthly_data">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">pivot_monthly_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_month</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.eto.pivot_monthly_data" title="Permalink to this definition"></a></dt>
+<dd><p>Pivots a DataFrame with monthly ETO data.</p>
+<p>The function pivots the input DataFrame by year, ID_ESTACION, and month to create a new DataFrame where each row
+corresponds to a combination of year, station ID, and month, and each column corresponds to a specific ETO value.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>eto_month (pd.DataFrame): A pandas DataFrame containing monthly ETO data with the following columns:</dt><dd><ul class="simple">
+<li><p>year (int): The year the data corresponds to.</p></li>
+<li><p>month (int): The month the data corresponds to.</p></li>
+<li><p>ID_ESTACION (int): The ID of the station the data corresponds to.</p></li>
+<li><p>Other columns: Columns with the monthly ETO values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>pd.DataFrame: A pivoted DataFrame with the following columns:</dt><dd><ul class="simple">
+<li><p>year (int): The year the data corresponds to.</p></li>
+<li><p>ID_ESTACION (int): The ID of the station the data corresponds to.</p></li>
+<li><p>Columns with the format ETO{MonthX}: Columns containing the ETO values for each month X (1-12).</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.eto.preprocess_eto_dataset">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.eto.</span></span><span class="sig-name descname"><span class="pre">preprocess_eto_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eto_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols_sum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.eto.preprocess_eto_dataset" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Preprocess the ETO dataset by performing the following steps:</dt><dd><ol class="arabic simple">
+<li><p>Extract features related to the number of days over/under a mean value for temperature, precipitation, snow, wind, and gusts using the function <cite>get_days_over_and_under_features</cite>.</p></li>
+<li><p>Add columns for the year and month of each data point using the function <cite>add_year_and_month</cite>.</p></li>
+<li><p>Get monthly aggregated data for the columns specified in <cite>cols_mean</cite> and <cite>cols_sum</cite> using the function <cite>get_monthly_data</cite>.</p></li>
+<li><p>Filter out data points from irrelevant months using the function <cite>filter_relevant_months</cite>.</p></li>
+<li><p>Fill in missing values for gust, snow, and precipitation columns with 0 using the function <cite>fillna_by_value</cite>.</p></li>
+<li><p>Fill in missing values for all other columns using the function <cite>fillna_by_group</cite>, grouping by station ID and month.</p></li>
+<li><p>Pivot the monthly data using the function <cite>pivot_monthly_data</cite>.</p></li>
+<li><p>Fill in missing values for the pivoted data using <cite>fillna_by_group</cite>, grouping by station ID.</p></li>
+<li><p>Merge the over/under features from step 1 with the pivoted data, using station ID and year as keys.</p></li>
+<li><p>If specified, save the final dataset as a CSV file at the <cite>output_path</cite> location.</p></li>
+</ol>
+</dd>
+<dt>Args:</dt><dd><p>eto_data (pd.DataFrame): A pandas DataFrame containing ETO data for one or more stations.
+cols_mean (list): A list of columns to calculate the mean for in the monthly aggregated data.
+cols_sum (list): A list of columns to calculate the sum for in the monthly aggregated data.
+output_path (str): The file path where the final preprocessed dataset should be saved. If None, the dataset will not be saved.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: A pandas DataFrame containing the preprocessed ETO data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-malbecs.preprocess.meteo">
+<span id="malbecs-preprocess-meteo"></span><h2>malbecs.preprocess.meteo<a class="headerlink" href="#module-malbecs.preprocess.meteo" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.meteo.flatten_pivot_columns">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.meteo.</span></span><span class="sig-name descname"><span class="pre">flatten_pivot_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.meteo.flatten_pivot_columns" title="Permalink to this definition"></a></dt>
+<dd><p>Flattens the columns of a pivot table.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The pivot table.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The flattened pivot table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.meteo.get_daily_mean_by_hour_range">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.meteo.</span></span><span class="sig-name descname"><span class="pre">get_daily_mean_by_hour_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meteo_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'temperature'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_hour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.meteo.get_daily_mean_by_hour_range" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the daily mean of a meteo variable within a specified hour range.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>meteo_data (pandas.DataFrame): The meteo data.
+col (str): The name of the column to compute the daily mean of.
+from_hour (int): The starting hour of the range (inclusive).
+to_hour (int): The ending hour of the range (exclusive).</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The daily mean of the specified variable within the specified hour range, grouped by station and date.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.meteo.get_light_fetaures">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.meteo.</span></span><span class="sig-name descname"><span class="pre">get_light_fetaures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meteo_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.meteo.get_light_fetaures" title="Permalink to this definition"></a></dt>
+<dd><p>Extracts features related to light hours from the given meteo_data.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>meteo_data (pandas.DataFrame): The input meteorological data.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: A dataframe containing light hour features. The dataframe has columns “ID_ESTACION”, “year”,
+“MeanLightHours_month_1”, “MeanLightHours_month_2”, …, “MeanLightHours_month_6”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.meteo.get_temp_features">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.meteo.</span></span><span class="sig-name descname"><span class="pre">get_temp_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meteo_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.meteo.get_temp_features" title="Permalink to this definition"></a></dt>
+<dd><p>Generates temperature-related features from the <cite>meteo_data</cite>.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>meteo_data: a pandas DataFrame containing weather data. It must have the following columns:
+- ‘validTimeUtc’: the timestamp of the measurement;
+- ‘ID_ESTACION’: the ID of the weather station;
+- ‘temperature’: the temperature value.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A pandas DataFrame with the following columns:
+- ‘ID_ESTACION’: the ID of the weather station;
+- ‘year’: the year of the measurement;
+- ‘month_&lt;n&gt;_temp_avg_daytime’: the average daytime temperature for month &lt;n&gt; (where &lt;n&gt; is a number between 1 and 6);
+- ‘month_&lt;n&gt;_temp_max_daytime’: the maximum daytime temperature for month &lt;n&gt;;
+- ‘month_&lt;n&gt;_temp_avg_nighttime’: the average nighttime temperature for month &lt;n&gt;;
+- ‘month_&lt;n&gt;_temp_min_nighttime’: the minimum nighttime temperature for month &lt;n&gt;.</p>
+</dd>
+</dl>
+<p>Note: missing values are filled using the ‘fillna_by_group’ function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.meteo.load_meteo_data">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.meteo.</span></span><span class="sig-name descname"><span class="pre">load_meteo_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.meteo.load_meteo_data" title="Permalink to this definition"></a></dt>
+<dd><p>Loads meteo data from a file.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The path to the file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The meteo data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.meteo.preproces_meteo_data">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.meteo.</span></span><span class="sig-name descname"><span class="pre">preproces_meteo_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meteo_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.meteo.preproces_meteo_data" title="Permalink to this definition"></a></dt>
+<dd><p>Preprocesses the raw meteorological data by extracting features related to temperature and light.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>meteo_data: A DataFrame containing the raw meteorological data.
+output_path: An optional string indicating the file path to save the preprocessed data to.</p>
+</dd>
+<dt>Returns:</dt><dd><p>A DataFrame containing the preprocessed meteorological data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-malbecs.preprocess.wine">
+<span id="malbecs-preprocess-wine"></span><h2>malbecs.preprocess.wine<a class="headerlink" href="#module-malbecs.preprocess.wine" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.wine.add_std_superficie">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.wine.</span></span><span class="sig-name descname"><span class="pre">add_std_superficie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.wine.add_std_superficie" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.wine.load_wine_dataset">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.wine.</span></span><span class="sig-name descname"><span class="pre">load_wine_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.wine.load_wine_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Loads a wine dataset from a file and returns it as a pandas DataFrame.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The path to the wine dataset file to load.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The loaded wine dataset as a pandas DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.wine.norm_columns">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.wine.</span></span><span class="sig-name descname"><span class="pre">norm_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#malbecs.preprocess.wine.norm_columns" title="Permalink to this definition"></a></dt>
+<dd><p>Renames the columns of a wine dataset to a standard set of column names.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine (pd.DataFrame): The wine dataset to normalize.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pd.DataFrame: The normalized wine dataset with standardized column names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.wine.preproces_wine_data">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.wine.</span></span><span class="sig-name descname"><span class="pre">preproces_wine_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wine_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna_alt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillna_sup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.wine.preproces_wine_data" title="Permalink to this definition"></a></dt>
+<dd><p>Preprocesses the input wine data by performing various data cleaning and imputation operations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>wine_data (pandas.DataFrame): The input wine data to preprocess.
+fillna_alt (bool): Whether to impute missing values in the ‘altitud’ column using group-wise mean imputation.
+fillna_sup (bool): Whether to impute missing values in the ‘superficie’ column using group-wise mean imputation.
+output_path (str): The file path to save the preprocessed data to. Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The preprocessed wine data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="malbecs.preprocess.wine.process_altitud">
+<span class="sig-prename descclassname"><span class="pre">malbecs.preprocess.wine.</span></span><span class="sig-name descname"><span class="pre">process_altitud</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#malbecs.preprocess.wine.process_altitud" title="Permalink to this definition"></a></dt>
+<dd><p>Takes in a pandas dataframe and processes the ‘altitud’ column by converting any altitude ranges
+(represented as a string with a dash) into the average of the range as a float.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (pandas.DataFrame): The input dataframe to process.</p>
+</dd>
+<dt>Returns:</dt><dd><p>pandas.DataFrame: The processed dataframe with the ‘altitud’ column transformed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="malbecs.modeling.html" class="btn btn-neutral float-left" title="malbecs.modeling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="malbecs.utils.html" class="btn btn-neutral float-right" title="malbecs.utils package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, malbecs.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
