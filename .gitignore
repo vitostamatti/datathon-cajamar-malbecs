@@ -140,5 +140,4 @@ data/models/*.pkl
 # !data/**/processed
 /old
 
-!pydocs/build/
 # !html/
