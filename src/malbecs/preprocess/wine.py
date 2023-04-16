@@ -2,28 +2,43 @@ from malbecs.utils import fillna_by_group, replace_zeros_with_na
 import pandas as pd
 import numpy as np
 
-from dataclasses import dataclass
+def load_wine_dataset(path: str) -> pd.DataFrame:
+    """
+    Loads a wine dataset from a file and returns it as a pandas DataFrame.
+
+    Args:
+        path (str): The path to the wine dataset file to load.
+
+    Returns:
+        pd.DataFrame: The loaded wine dataset as a pandas DataFrame.
+    """
+    # Load the wine dataset using pandas and set the separator parameter.
+    wine_dataset = pd.read_csv(path, sep='|')
+
+    # Return the loaded wine dataset as a pandas DataFrame.
+    return wine_dataset
 
 
-@dataclass()
-class WinePreprocessConfig:
-    path: str
-    fillna_sup: bool
-    fillna_alt: bool
-    output_path: str = None
+def norm_columns(wine: pd.DataFrame) -> pd.DataFrame:
+    """
+    Renames the columns of a wine dataset to a standard set of column names.
 
+    Args:
+        wine (pd.DataFrame): The wine dataset to normalize.
 
-def load_wine_dataset(path: str):
-    return pd.read_csv(path, sep='|')
-
-
-def norm_columns(wine):
+    Returns:
+        pd.DataFrame: The normalized wine dataset with standardized column names.
+    """
+    # Define the new column names to use.
     new_cols = [
         'campaña', 'id_finca', 'id_zona',
         'id_estacion', 'altitud', 'variedad',
         'modo', 'tipo', 'color', 'superficie', 'produccion'
     ]
+    # Rename the columns of the wine dataset to the new column names.
     wine.columns = new_cols
+
+    # Return the normalized wine dataset with standardized column names.
     return wine
 
 

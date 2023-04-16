@@ -104,6 +104,21 @@ def load_trained_model(path):
         model = pkl.load(file)
     return model
 
+def convert_cat_features(X):
+    cat_cols = [
+        'id_finca',
+        'id_zona',
+        'id_estacion',
+        'variedad',
+        "modo",
+        "tipo",
+        "color",
+        "prod_shift1_gt_shift2",
+        "sup_is_nan",
+    ]
+
+    X[cat_cols] = X[cat_cols].astype('category')
+    return X
 
 def load_xy(wine_path, eto_path, meteo_path, min_camp=14, max_camp=21):
 
@@ -117,18 +132,7 @@ def load_xy(wine_path, eto_path, meteo_path, min_camp=14, max_camp=21):
 
     X, y = xy_split(data_train)
 
-    cat_cols = [
-        'id_finca',
-        'id_zona',
-        'id_estacion',
-        'variedad',
-        "modo",
-        "tipo",
-        "color",
-        "prod_shift1_gt_shift2"
-    ]
-
-    X[cat_cols] = X[cat_cols].astype('category')
+    X = convert_cat_features(X)
 
     return X, y
 

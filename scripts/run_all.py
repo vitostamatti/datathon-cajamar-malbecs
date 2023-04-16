@@ -93,18 +93,7 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
 
     X, y = tr.xy_split(data_train)
 
-    cat_cols = [
-        'id_finca',
-        'id_zona',
-        'id_estacion',
-        'variedad',
-        "modo",
-        "tipo",
-        "color",
-        "prod_shift1_gt_shift2"
-    ]
-
-    X[cat_cols] = X[cat_cols].astype('category')
+    X = tr.convert_cat_features(X)
 
     train_idxs, test_idxs = tr.CampKFold.get_train_test(
         X['campaña'], from_camp=19, to_camp=21
@@ -132,24 +121,15 @@ def run_all(wine_raw, eto_raw, meteo_raw, preds_path):
     logger.info(f"Test Mean RMSE: {np.mean(res.get('test_score'))}")
 
     logger.info(f"Training on full dataset")
-    models = []
-    for i in range(10):
-        m = mm.get_final_model()
-        m.set_params(randomforestregressor__random_state=mm.seed*(1+i))
-        m.fit(X, y)
-        models.append(m)
+    m.fit(X, y)
 
+    logger.info("Running predictions for 2022")
+    
     data_final = tr.filter_camp(data, min_camp=22, max_camp=22)
-
     X_final, _ = tr.xy_split(data_final)
+    X_final = tr.convert_cat_features(X_final)
 
-    X_final[cat_cols] = X_final[cat_cols].astype('category')
-
-    preds_final = []
-    for model in models:
-        preds_final.append(model.predict(X_final))
-
-    y_pred_final = np.mean(preds_final, 0)
+    y_pred_final = m.predict(X_final)
 
     preds_final = data_final[['id_finca', 'variedad',
                               'modo', 'tipo', 'color', 'superficie']].copy()

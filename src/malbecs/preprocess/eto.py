@@ -73,7 +73,6 @@ def load_eto_dataset(path: str) -> pd.DataFrame:
     # Return the loaded dataset as a pandas DataFrame.
     return eto
 
-
 def parse_date(eto: pd.DataFrame) -> pd.DataFrame:
     """
     Convert the date column in a pandas DataFrame to a datetime object.
@@ -90,6 +89,7 @@ def parse_date(eto: pd.DataFrame) -> pd.DataFrame:
             lambda x: "{}/{}/{}".format(x[4:6], x[6:], x[0:4])
         )
     )
+    return eto
 
 
 def add_year_and_month(eto: pd.DataFrame):
@@ -179,6 +179,7 @@ def get_mean_and_std_by_month(eto_data, column):
     )
 
 
+
 def get_days_over_and_under_mean(eto_data, column, out_column_name, over=True, under=True):
 
     def rename(df):
@@ -190,6 +191,7 @@ def get_days_over_and_under_mean(eto_data, column, out_column_name, over=True, u
         return df[overcols + undercols]
 
     month_data = get_mean_and_std_by_month(eto_data, column)
+
     return (eto_data
             [['ID_ESTACION', 'date', column]]
             .assign(
@@ -254,7 +256,7 @@ def get_days_over_and_under_features(eto_data):
             under=False
         )
     )
-    feat_cols = features.columns.to_list()
+    # feat_cols = features.columns.to_list()
     features = filter_relevant_months(features.reset_index())
     features = pivot_monthly_data(features)
     features = fillna_by_value(features, cols=features.columns, value=-1)

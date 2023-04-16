@@ -55,40 +55,21 @@ def run_pred(wine_path, eto_path, meteo_path, model_path, preds_path):
     logger.info(
         f'Loading files:\n \t\t\t{wine_path}\n \t\t\t{eto_path}\n \t\t\t{meteo_path}')
 
-    data = tr.load_final_data(
+    X_final, _ = tr.load_xy(
         wine_path=final_wine_path,
         eto_path=final_eto_path,
-        meteo_path=final_meteo_path
+        meteo_path=final_meteo_path,
+        min_camp=22,
+        max_camp=22
     )
-
-    data_final = tr.filter_camp(data, min_camp=22, max_camp=22)
-
-    cat_cols = [
-        'id_finca',
-        'id_zona',
-        'id_estacion',
-        'variedad',
-        "modo",
-        "tipo",
-        "color",
-        "prod_shift1_gt_shift2"
-    ]
-
-    X_final, _ = tr.xy_split(data_final)
-
-    X_final[cat_cols] = X_final[cat_cols].astype('category')
 
     logger.info(f'Loading model {model_path}')
     
-    models = mm.load_trained_model(model_path)
+    model = mm.load_trained_model(model_path)
 
-    preds_final = []
-    for model in models:
-        preds_final.append(model.predict(X_final))
+    y_pred_final = model.predict(X_final)
 
-    y_pred_final = np.mean(preds_final,0)
-
-    preds_final = data_final[['id_finca', 'variedad',
+    preds_final = X_final[['id_finca', 'variedad',
                               'modo', 'tipo', 'color', 'superficie']].copy()
 
     preds_final['produccion'] = y_pred_final

@@ -53,28 +53,14 @@ def run_train(wine_final, eto_final, meteo_final, model_final):
 
     logger.info(
         f'Loading files:\n \t\t\t{wine_final}\n \t\t\t{eto_final}\n \t\t\t{meteo_final}\n')
-    data = tr.load_final_data(
+    
+    X, y = tr.load_xy(
         wine_path=final_wine_path,
         eto_path=final_eto_path,
-        meteo_path=final_meteo_path
+        meteo_path=final_meteo_path,
+        min_camp=15,
+        max_camp=21
     )
-
-    data_train = tr.filter_camp(data.copy(), min_camp=15, max_camp=21)
-
-    X, y = tr.xy_split(data_train)
-
-    cat_cols = [
-        'id_finca',
-        'id_zona',
-        'id_estacion',
-        'variedad',
-        "modo",
-        "tipo",
-        "color",
-        "prod_shift1_gt_shift2"
-    ]
-
-    X[cat_cols] = X[cat_cols].astype('category')
 
     train_idxs, test_idxs = tr.CampKFold.get_train_test(
         X['campaña'], from_camp=19, to_camp=21
@@ -102,15 +88,10 @@ def run_train(wine_final, eto_final, meteo_final, model_final):
     logger.info(f"Test Mean RMSE: {np.mean(res.get('test_score'))}")
 
     logger.info(f"Training on full dataset")
-    models = []
-    for i in range(10):
-        m = mm.get_final_model()
-        m.set_params(randomforestregressor__random_state=mm.seed*(1+i))
-        m.fit(X, y)
-        models.append(m)
+    m.fit(X, y)
 
     logger.info(f"Saving model to {model_final}")
-    mm.save_trained_model(models, model_final)
+    mm.save_trained_model(m, model_final)
 
 
 if __name__ == "__main__":
@@ -118,3 +99,4 @@ if __name__ == "__main__":
         logging.config.fileConfig('./config/log.conf')
 
     run_train(args.wine_final, args.eto_final, args.meteo_final, args.model)
+
