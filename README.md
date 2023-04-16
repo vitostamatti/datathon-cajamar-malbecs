@@ -117,7 +117,7 @@ La presentacion [Datathon Cajamar 2023 - Malbecs - Fase Nacional](./docs/Datatho
 
 -   [01-Exploracion-Malbecs](/notebooks/01-Exploracion-Malbecs.ipynb): se detalla el propceso de exploracion y visualizacion inicial de los datos, como asi tambien las primeras decisiones sobre tratamiento de variables, generacion y utilizacion de las mismas.
 
--   [02-Prediccion-Malbecs](/notebooks/02-Prediccion-Malbecs.ipynb): se detalla el paso a paso del preprocesamiento y la ingenieria de variables realizada, como asi tambien el entrenamiento y evaluacion del modelo seleccionado.
+-   [02-Prediccion-Malbecs](/notebooks/02-Prediccion-Malbecs-Nacional.ipynb): se detalla el paso a paso del preprocesamiento y la ingenieria de variables realizada, como asi tambien el entrenamiento y evaluacion del modelo seleccionado.
 
 Dentro de este, se encuentran comentados y analizados los nuevos conceptos a tener en cuenta en la entrega: **Transparencia, Explicabilidad, Sostenibilidad y Justicia**
 Para justicia y explicabilidad hemos creado apartados en este script de prediccion, mientras que para sostenibilidad hemos decorado los archivos .py ejecutables con memorias que entregan el consumo energetico y computacional. Por último, para asegurar una transparencia en nuestro código y modelo, generamos la documentación pertinente para todas las funciones creadas, generamos los comentarios necesarios en los notebooks, y creamos un dashboard adjunto en PowerBi para analizar las producciones y errores en un mayor grado de detalle.
