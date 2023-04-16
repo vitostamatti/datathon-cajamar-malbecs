@@ -57,7 +57,8 @@ def process_altitud(data):
 
     
 def add_std_superficie(wine_data):
-    std_sup = wine_data.dropna(subset='superficie').groupby(
+
+    std_sup = wine_data.dropna(subset=['superficie']).groupby(
         ['id_finca','variedad','modo']
     )['superficie'].std().fillna(0).rename("std_superficie")
 
